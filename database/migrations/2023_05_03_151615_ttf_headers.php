@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('TTF_RETURN_DATE');
             $table->date('TTF_GIRO_DATE');
             $table->integer('ORG_ID');
-            $table->string('SOURCE');  
+            $table->string('SOURCE');
             $table->integer('REVIEWED_BY');
             $table->date('REVIEWED_DATE');
             $table->integer('CREATED_BY');

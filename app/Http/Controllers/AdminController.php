@@ -11,24 +11,27 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $this->authorize('admin');
+        // $this->authorize('admin');
         $pmb = DB::table('pemberitahuan')
-        ->get();
+            ->get();
         return view('homeadmin', [
             "title" => "homeadmin",
-            'pmb' => $pmb
+            'pmb' => []
         ]);
     }
-    public function detail_pemberitahuan($id1){
+
+    public function detail_pemberitahuan($id1)
+    {
         $pmb = DB::table('pemberitahuan')
-        ->where('ID','=',$id1)
-        ->get();
+            ->where('ID', '=', $id1)
+            ->get();
         return view('detail_pemberitahuan', [
             "title" => "detailpemberitahuan",
             'pmb' => $pmb,
         ]);
     }
-    public function userlogin(){
+    public function userlogin()
+    {
         $ambil = auth()->user()->id;
         $user = User::where();
     }
@@ -49,8 +52,8 @@ class AdminController extends Controller
         $ambil = auth()->user()->id;
         $this->authorize('admin');
         $usr = DB::table('users')
-        ->join('role_user','users.id_roleuser','=','role_user.id_roleuser')
-        ->get();
+            ->join('role_user', 'users.id_roleuser', '=', 'role_user.id_roleuser')
+            ->get();
         return view('aturuser', [
             "title" => "aturuser",
             'userdata' =>  User::find($ambil),
@@ -98,23 +101,23 @@ class AdminController extends Controller
         $ambil = auth()->user()->id;
         $this->authorize('admin');
         $pmb = DB::table('pemberitahuan')
-        ->get();
+            ->get();
         return view('aturpemberitahuan', [
             "title" => "aturpemberitahuan",
             'userdata' =>  User::find($ambil),
             'pmb' => $pmb
         ]);
-       
     }
-   
 
-    public function save_pemberitahuan(Request $request){
+
+    public function save_pemberitahuan(Request $request)
+    {
         $ambil = auth()->user()->id;
-            $userdata =  User::find($ambil);
-            DB::table('pemberitahuan')->insert([
-                'Tanggal' => date('Y-m-d H:i:s'),
-                'Subjek' => $request->subjek,
-                'Detail' => $request->detail_pemberitahuan,
+        $userdata =  User::find($ambil);
+        DB::table('pemberitahuan')->insert([
+            'Tanggal' => date('Y-m-d H:i:s'),
+            'Subjek' => $request->subjek,
+            'Detail' => $request->detail_pemberitahuan,
         ]);
         return redirect('/aturpemberitahuan');
     }
@@ -124,10 +127,11 @@ class AdminController extends Controller
             "title" => "download"
         ]);
     }
-    public function downloadJK(){
-        $file="./download/JuklakNew_Apr21.pdf";
+    public function downloadJK()
+    {
+        $file = "./download/JuklakNew_Apr21.pdf";
         return Response::download($file);
-}
+    }
     public function pemberitahuan()
     {
         return view('pemberitahuan', [

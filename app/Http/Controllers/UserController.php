@@ -11,7 +11,8 @@ class UserController extends Controller
     public function index()
     {
         return view('home', [
-            "title" => "home"
+            "title" => "home",
+            'pmb' => []
         ]);
     }
     public function userlogin(){

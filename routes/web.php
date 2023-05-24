@@ -13,27 +13,29 @@ Route::post('/', [App\Http\Controllers\LoginController::class, 'authenticate']);
 Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout']);
 
 /*user*/
-Route::get('/home', [App\Http\Controllers\UserController::class, 'index'])->middleware('supplier');
-Route::get('/home/jk', [App\Http\Controllers\UserController::class, 'downloadJK'])->middleware('supplier');
-Route::get('/inputttf', [App\Http\Controllers\UserController::class, 'inputttf'])->middleware('supplier');
-Route::get('/inputfp', [App\Http\Controllers\UserController::class, 'inputfp'])->middleware('supplier');
-Route::get('/download', [App\Http\Controllers\UserController::class, 'download'])->middleware('supplier');
+Route::group(['middleware' => ['supplier']], function () {
+    Route::get('/home', [App\Http\Controllers\UserController::class, 'index']);
+    Route::get('/home/jk', [App\Http\Controllers\UserController::class, 'downloadJK']);
+    Route::get('/inputttf', [App\Http\Controllers\UserController::class, 'inputttf']);
+    Route::get('/inputfp', [App\Http\Controllers\UserController::class, 'inputfp']);
+    Route::get('/download', [App\Http\Controllers\UserController::class, 'download']);
+});
 
 /*admin*/
-
-Route::get('/homeadmin', [App\Http\Controllers\AdminController::class, 'index'])->middleware('admin');
-Route::get('/homeadmin/jk', [App\Http\Controllers\AdminController::class, 'downloadJK'])->middleware('admin');
-Route::get('/aturlimit', [App\Http\Controllers\AdminController::class, 'aturlimit'])->middleware('admin');
-Route::get('/aturuser', [App\Http\Controllers\AdminController::class, 'aturuser'])->middleware('admin');
-Route::get('/datattf', [App\Http\Controllers\AdminController::class, 'datattf'])->middleware('admin');
-Route::get('/datasup', [App\Http\Controllers\AdminController::class, 'datasup'])->middleware('admin');
-Route::get('/datalampfp', [App\Http\Controllers\AdminController::class, 'datalampfp'])->middleware('admin');
-Route::get('/kuotaharian', [App\Http\Controllers\AdminController::class, 'kuotaharian'])->middleware('admin');
-Route::get('/laporanttf', [App\Http\Controllers\AdminController::class, 'laporanttf'])->middleware('admin');
-Route::get('/monitoringfp', [App\Http\Controllers\AdminController::class, 'monitoringfp'])->middleware('admin');
-Route::get('/aturpemberitahuan', [App\Http\Controllers\AdminController::class, 'aturpemberitahuan'])->middleware('admin');
-Route::get('/downloadadmin', [App\Http\Controllers\AdminController::class, 'download'])->middleware('admin');
-
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('/homeadmin', [App\Http\Controllers\AdminController::class, 'index']);
+    Route::get('/homeadmin/jk', [App\Http\Controllers\AdminController::class, 'downloadJK']);
+    Route::get('/aturlimit', [App\Http\Controllers\AdminController::class, 'aturlimit']);
+    Route::get('/aturuser', [App\Http\Controllers\AdminController::class, 'aturuser']);
+    Route::get('/datattf', [App\Http\Controllers\AdminController::class, 'datattf']);
+    Route::get('/datasup', [App\Http\Controllers\AdminController::class, 'datasup']);
+    Route::get('/datalampfp', [App\Http\Controllers\AdminController::class, 'datalampfp']);
+    Route::get('/kuotaharian', [App\Http\Controllers\AdminController::class, 'kuotaharian']);
+    Route::get('/laporanttf', [App\Http\Controllers\AdminController::class, 'laporanttf']);
+    Route::get('/monitoringfp', [App\Http\Controllers\AdminController::class, 'monitoringfp']);
+    Route::get('/aturpemberitahuan', [App\Http\Controllers\AdminController::class, 'aturpemberitahuan']);
+    Route::get('/downloadadmin', [App\Http\Controllers\AdminController::class, 'download']);
+});
 
 Route::post('/aturpemberitahuan/save_pemberitahuan', [App\Http\Controllers\AdminController::class, 'save_pemberitahuan'])->middleware('admin');
 Route::get('/homeadmin/detail_pemberitahuan/{id1}', [App\Http\Controllers\AdminController::class, 'detail_pemberitahuan'])->middleware('admin');
