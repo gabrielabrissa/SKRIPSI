@@ -14,41 +14,15 @@
         <div class="col-md-10 mt-4">
           <div class="card">
             <div class="card-header pb-0 px-3">
+            @foreach($pmb as $p)
               <h6 class="mb-0">Pemberitahuan</h6>
             </div>
             <div class="card-body pt-4 p-3">   
               <ul class="list-group">
                 <li class="list-group-item border-0 d-flex p-4 mb-2 bg-light border-radius-lg">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">4 November 2022</h6>
-                    <span class="mb-2 text-xs">Pemberitahuan pengiriman dokumen ke kantor
-                  </div>
-                  <div class="ms-auto text-end">
-                  <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-light border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">4 Mei 2022</h6>
-                    <span class="mb-2 text-xs">Pemberitahuan pengiriman dokumen ke kantor
-                  </div>
-                  <div class="ms-auto text-end">
-                  <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-light border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">9 Juni 2022</h6>
-                    <span class="mb-2 text-xs">Informasi Pendaftaran User
-                  </div>
-                  <div class="ms-auto text-end">
-                  <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-light border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">5 April 2022</h6>
-                    <span class="mb-2 text-xs">Informasi Faktur Pajak
+                    <h6 class="mb-3 text-sm">{{ date('d F Y', strtotime($p->Tanggal)) }}</h6>
+                    <span class="mb-2 text-xs">{{$p->Subjek }}
                   </div>
                   <div class="ms-auto text-end">
                   <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
@@ -58,7 +32,7 @@
             </div>
           </div>
         </div>
-   
+        @endforeach
      <!-- Download Juklak -->
     <div class="col-md-2 mt-4">
                   <div class="card">
@@ -69,7 +43,8 @@
                     </div>
                     <div class="card-body pt-0 p-1 text-center">
                       <hr class="horizontal dark my-1">
-                      <button class="btn btn-outline-gradient-primary text-primary text-sm "></i> JUKLAK</button>
+                      <a href="/home/jk" class="btn btn-outline-gradient-primary text-primary text-sm "><i class="icon-download-alt"> </i> JUKLAK </a>
+                      
                     </div>
                   </div>
                 </div>   

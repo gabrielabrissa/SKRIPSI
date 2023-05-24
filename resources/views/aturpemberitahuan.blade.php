@@ -23,17 +23,18 @@
             </div>
             <div class="card-body">
             <div class="row">
-              <form>
+              <form action="/aturpemberitahuan/save_pemberitahuan" method="post" class="">
+               @php echo csrf_field() @endphp
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Subjek</label>
-                    <input class="form-control" type="text" >
+                    <input class="form-control" type="text" id="subjek" name="subjek" require="required">
                   </div>
                 </div>
                 <div class="col-md-12">
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1">Detail Pemberitahuan</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                  <textarea class="form-control" id="detail_pemberitahuan" name ="detail_pemberitahuan" rows="5" require="required"></textarea>
                 </div>
               </div>
                 <div class="col-12 text-end">
@@ -67,20 +68,27 @@
                             </tr>
                         </thead>
                         <tbody>
+                          <?php $no=1;?>
+                        @foreach($pmb as $p)
                             <tr>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"></span>
+                                <span class="text-secondary text-xs font-weight-bold">{{$no }}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"></span>
+                                <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($p->Tanggal)) }}</span>
+                            </td>
+                            <td class="align-middle text-left">
+                                <span class="text-secondary text-xs font-weight-bold">{{$p->Subjek }}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"></span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"></span>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal6 <?php $p->ID?>">Detail</button>
+
+                            @include('Modal.pemberitahuanModal') 
+                            <?php $no++;?>
+                            
                             </td>
                             </tr>
+                            @endforeach
                         </tbody>
                         </table>
                     </div>
@@ -94,5 +102,5 @@
         </div>
     </div>
 </div>
-@include('Modal.addfpModal') 
+
 @endsection

@@ -14,8 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->increments('id');
+            $table->string('username',50);
+            $table->unsignedInteger('id_roleuser');
+            $table->foreign('id_roleuser')
+            ->references('id_roleuser')
+            ->on('role_user')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

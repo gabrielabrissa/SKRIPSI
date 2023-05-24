@@ -21,14 +21,14 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center text-white">
-            <span class="d-sm-inline d-none">IT</span>
+            <span class="d-sm-inline d-none">{{ auth()->user()-> username }}</span>
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a href="/login" class="nav-link text-white font-weight-bold px-0">
-                <i class="fa fa-fw fa-power-off me-sm-1"></i>
-                <span class="d-sm-inline d-none">Log Out</span>
-              </a>
+            <form action="/logout" method="post">
+                @csrf
+                <button type="submit"><i class="fa fa-fw fa-power-off me-sm-1"></i><span class="d-sm-inline d-none">Log Out</span></button>
+              </form>
             </li>
 
               </ul>

@@ -1,4 +1,4 @@
-<div id="modal4" class="modal fade" tabindex="-1">
+<div id="modal5" class="modal fade" tabindex="-1">
 <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header ">
@@ -8,6 +8,8 @@
 <!-- Modal Body -->
 <div class="container-fluid py-4">
 <div class="row">
+<form action="/aturuser/simpan_user" method="post" class="">                        
+    @php echo csrf_field() @endphp
   <div class="form-group">
     <div class="row mb-1">
         <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">Username</label>
@@ -70,21 +72,9 @@
         </div>
     </div>
 </div>
-<div class="form-group">
-    <div class="row mb-1">
-        <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">Reset Status Flag</label>
-        <div class="col-sm-8">
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">Ya</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                <label class="form-check-label" for="inlineRadio2">Tidak</label>
-            </div>
-        </div>
-    </div>
-</div>
+
+</form>
+
 </div>
 </div>
                             
@@ -142,4 +132,3 @@
         </div>
     </div>
 </div>
-@include('Modal.addfpModal') 

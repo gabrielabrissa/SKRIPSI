@@ -17,7 +17,7 @@
                     <select class="form-select" aria-label="Pilih Tipe FP">
                     <option selected>Pilih Tipe FP</option>
                     <option value="1">Standart</option>
-                    <option value="2"></option>
+                    <option value="2">Tanpa Faktur Pajak</option>
                   </select>
                     </div>
                   </div>      
@@ -143,4 +143,4 @@
 </div>
 </div>
 
-@include('Modal.bpbModal') 
+@include('Modal.pilihbpbModal') 

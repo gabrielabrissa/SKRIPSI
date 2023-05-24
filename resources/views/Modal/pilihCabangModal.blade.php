@@ -51,4 +51,4 @@
     </div>
 </div>
 
-@include('Modal.addttfModal') 
+@include('Modal.tambahttfModal') 

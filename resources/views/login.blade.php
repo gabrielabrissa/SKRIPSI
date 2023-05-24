@@ -10,21 +10,27 @@
         <div class="container">
         <div class="row justify-content-end">
         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+        @if(session()->has('logineror'))
+            <div class = "alert alert-danger alert-dismissible fade show  text-white" role="alert">
+                {{session('logineror')}}
+            <button type ="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card z-index-0">
-            <div class="card-header text-center pt-4">
-                  <h4 class="font-weight-bolder">Login</h4>
+            <div class="card-header text-center pt-4 bg-secondary">
+                  <h4 class="font-weight-bolder text-white ">Login</h4>
                 </div>
-                <div class="card-body">
-                  <form role="form">
+                <div class="card-body bg-gradient-light">
+                  <form action="/" method="post">
+                    @csrf
                     <div class="mb-3">
-                      <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username">
+                      <input type="text" class="form-control form-control-lg" name="username" placeholder="Username" autofocus required value="{{ old('username') }}" aria-label="Username">
                     </div>
                     <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" required aria-label="Password">
                     </div>
-                    <a class="text-center" href="/homeadmin">
-                      <button type="button" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Login</button>
-                    </a>
+                    <button class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit">Login</button>
+                  
                   </form>
                 </div>
               </div>

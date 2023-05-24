@@ -106,6 +106,6 @@
         </div>
       </div>
       </div>
-@include('Modal.inputttfModal') 
+@include('Modal.pilihCabangModal') 
 @endsection
 

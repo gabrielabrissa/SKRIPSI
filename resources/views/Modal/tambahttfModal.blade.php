@@ -102,4 +102,4 @@
         </div>
     </div>
 </div>
-@include('Modal.addfpModal') 
+@include('Modal.tambahTandaTerimaFakturModal') 

@@ -18,7 +18,7 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
               <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal4">Add User</button>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal5">Add User</button>
               <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
@@ -44,33 +44,35 @@
                     </tr>
                   </thead>
                   <tbody>
+                  @foreach($usr as $u)
                   <tr>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">CV_Username@HO</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ $u->username}}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">DANIEL.ANAN@IMC.CO.ID</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{$u->email }}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">20</span>
+                        <span class="text-secondary text-xs font-weight-bold"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">2022-04-08</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($u->created_at)) }}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">ADMIN</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{$u->nama_role}} </span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Y</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{$u->active_flag}}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">N</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{$u->reset_flag}}</span>
                       </td>
                       <td class="align-middle text-center">
                       <a class="text-center" href=""><button type="button" class="btn btn-enabled">Edit</button></a>
                         
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
                 <nav aria-label="...">
