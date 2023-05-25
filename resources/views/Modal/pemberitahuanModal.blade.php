@@ -1,5 +1,5 @@
 
-  <div id="#modal6 <?php $p->ID?>" class="modal fade" tabindex="-1">
+  <div id="modal6{{ $p->ID }}" class="modal fade" tabindex="-1">
 <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header ">
@@ -7,28 +7,20 @@
                 </div>
                 <div class="modal-body">
 <!-- Modal Body -->
-<div class="container-fluid py-4">
+<div class="container-fluid py-1">
 <div class="row">
 <div class="card">
           <div class="card-header pb-0">
               <div class="d-flex align-items-center">
-                <p class="mb-0">Input Pemberitahuan Baru</p>
+                <p class="mb-0" style="text-align: center" ><b>{{ $p->Subjek }}</b></p>
               </div>
              </div>
              <div class="card-body">
              <div class="row">
                <form>
-               
-                 <div class="col-md-12">
-                   <div class="form-group">
-                     <label for="example-text-input" class="form-control-label">Subjek</label>
-                     <input class="form-control" type="text" value="{{ $p->Subjek }}">
-                   </div>
-                 </div>
                  <div class="col-md-12">
                  <div class="form-group">
-                   <label for="exampleFormControlTextarea1">Detail Pemberitahuan</label>
-                   <textarea class="form-control"  rows="5" value="{{ $p->Detail }}"></textarea>
+                   <textarea disabled style="font-size: small; font-family: arial; text-align: justify;" class="form-control"  rows="20"">{{ $p->Detail }}</textarea>
                  </div>
                </div>
                

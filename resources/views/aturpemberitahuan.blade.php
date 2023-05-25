@@ -81,7 +81,7 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$p->Subjek }}</span>
                             </td>
                             <td class="align-middle text-center">
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal6 <?php $p->ID?>">Detail</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal6{{ $p->ID }}">Detail</button>
 
                             @include('Modal.pemberitahuanModal') 
                             <?php $no++;?>

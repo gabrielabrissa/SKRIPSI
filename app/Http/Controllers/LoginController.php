@@ -1,15 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
     public function login()
     {
         return view('login');
+    }
+    public function userlogin(){
+        $ambil = auth()->user()->id;
+        $user = User::where();
     }
 
     public function authenticate(Request $request){

@@ -19,15 +19,7 @@
             <div class="card-header pb-0">
               <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal5">Add User</button>
-              <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <div class="input-group mb-2">
-                    <input class="form-control" placeholder="Search" type="text">
-                  </div>
-                </div>
-              </div>
-            </div>
+
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table table-bordered -mb-1">

@@ -26,15 +26,14 @@
                     <span class="mb-1 text-xs">{{$p->Subjek }}
                   </div>
                   <div class="ms-auto text-end">                  
-                  <a href="/homeadmin/detail_pemberitahuan/{{ $p->ID }}" class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></a></div>
+                  <button type="button" class="btn btn-link btn-icon-only btn-rounded btn-sm" data-toggle="modal" data-target="#modal6{{ $p->ID }}"><i class="ni ni-bold-right" ></i></button>
+                  @include('Modal.pemberitahuanModal') 
                 </li>
               </ul>
               @endforeach
             </div>
           </div>
         </div>
-        
-   
      <!-- Download Juklak -->
     <div class="col-md-2 mt-4">
                   <div class="card">

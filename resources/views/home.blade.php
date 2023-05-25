@@ -10,29 +10,31 @@
 
 @section('body')
 <div class="container-fluid py-1 px-0">
-<div class="row">
+<div class="row ">
         <div class="col-md-10 mt-4">
-          <div class="card">
+          <div class="card ">
             <div class="card-header pb-0 px-3">
-            @foreach($pmb as $p)
-              <h6 class="mb-0">Pemberitahuan</h6>
+              <h6 class="mb-2">Pemberitahuan</h6>
+              @foreach($pmb as $p)
             </div>
-            <div class="card-body pt-4 p-3">   
+            <div class="card-body pt-0 p-3">   
               <ul class="list-group">
                 <li class="list-group-item border-0 d-flex p-4 mb-2 bg-light border-radius-lg">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">{{ date('d F Y', strtotime($p->Tanggal)) }}</h6>
-                    <span class="mb-2 text-xs">{{$p->Subjek }}
+                    <h6 class="mb-2 text-sm">{{ date('d F Y', strtotime($p->Tanggal)) }}</h6>
+                    <span class="mb-1 text-xs">{{$p->Subjek }}
                   </div>
-                  <div class="ms-auto text-end">
-                  <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                  </div>
+                  <div class="ms-auto text-end">                  
+                  <button type="button" class="btn btn-link btn-icon-only btn-rounded btn-sm" data-toggle="modal" data-target="#modal6{{ $p->ID }}"><i class="ni ni-bold-right" ></i></button>
+                  @include('Modal.pemberitahuanModal') 
                 </li>
               </ul>
+              @endforeach
             </div>
           </div>
         </div>
-        @endforeach
+        
+   
      <!-- Download Juklak -->
     <div class="col-md-2 mt-4">
                   <div class="card">
@@ -43,9 +45,8 @@
                     </div>
                     <div class="card-body pt-0 p-1 text-center">
                       <hr class="horizontal dark my-1">
-                      <a href="/home/jk" class="btn btn-outline-gradient-primary text-primary text-sm "><i class="icon-download-alt"> </i> JUKLAK </a>
-                      
-                    </div>
+                      <a href="/homeadmin/jk" class="btn btn-outline-gradient-primary text-primary text-sm "><i class="icon-download-alt"> </i> JUKLAK </a>
+                      </div>
                   </div>
                 </div>   
 </div> 
