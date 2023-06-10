@@ -1,4 +1,4 @@
-<div id="modal3{{ $c->ID2 }}" class="modal fade" data-backdrop="static" tabindex="-1">
+<div id="modal3-{{ $c->ID2 }}" class="modal fade" data-backdrop="static" tabindex="-1">
 <div class="modal-dialog modal-lg ">
             <div class="modal-content ">
                 <div class="modal-header bg-light">
@@ -20,7 +20,7 @@
                     <option value="2">Tanpa Faktur Pajak</option>
                   </select>
                     </div>
-                  </div>      
+                  </div>
                   <div class="form-group">
                   <h6 class="font-weight-bolder mb-2">Faktur Pajak</h6>
                     <div class="row mb-0">
@@ -47,7 +47,7 @@
                       <input type="date" class="form-control form-control-sm" id="colFormLabelSm" placeholder="date">
                     </div>
                   </div>
-                 
+
     <!--  Summary -->
 
     <div class="form-group">
@@ -79,9 +79,9 @@
                     </div>
                   </div>
                 </div>
-             
+
 <!--  End Summary -->
-              </div>                    
+              </div>
           </div>
       </div>
 </div>
@@ -133,7 +133,7 @@
       </div>
       </div>
     </div>
-       
+
     <!--  End Tabel BPB -->
       <div class="modal-footer ">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
@@ -145,4 +145,4 @@
 </div>
 </div>
 
-@include('Modal.pilihbpbModal') 
+@include('Modal.pilihbpbModal')

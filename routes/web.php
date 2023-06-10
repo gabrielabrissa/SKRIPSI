@@ -27,6 +27,9 @@ Route::group(['middleware' => ['supplier']], function () {
     Route::get('/inputttf/pilihcabang/{id2}', [InputTTFController::class, 'pilihCabang'])->name('inputttf.pilihCabang');
     // Route::post('/inputttf', [InputTTFController::class, 'simpan_bpb2']);
     Route::get('/download', [DownloadController::class, 'download']);
+
+    Route::get('/get-sys-supp-site', [InputTTFController::class, 'getSysSuppSite']);
+    Route::get('/get-ttf-data-bpb', [InputTTFController::class, 'getTtfDataBpb']);
 });
 
 /*admin*/
