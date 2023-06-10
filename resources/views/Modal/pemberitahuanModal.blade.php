@@ -12,7 +12,7 @@
 <div class="card">
           <div class="card-header pb-0">
               <div class="d-flex align-items-center">
-                <p class="mb-0" style="text-align: center" ><b>{{ $p->Subjek }}</b></p>
+                <p class="mb-0" style="text-align: center" ><b>{{ $p->SUBJEK }}</b></p>
               </div>
              </div>
              <div class="card-body">
@@ -20,7 +20,7 @@
                <form>
                  <div class="col-md-12">
                  <div class="form-group">
-                   <textarea disabled style="font-size: small; font-family: arial; text-align: justify;" class="form-control"  rows="20"">{{ $p->Detail }}</textarea>
+                   <textarea disabled style="font-size: small; font-family: arial; text-align: justify;" class="form-control"  rows="20"">{{ $p->DETAIL }}</textarea>
                  </div>
                </div>
                

@@ -24,10 +24,10 @@
                   <form action="/" method="post">
                     @csrf
                     <div class="mb-3">
-                      <input type="text" class="form-control form-control-lg" name="username" placeholder="Username" autofocus required value="{{ old('username') }}" aria-label="Username">
+                      <input type="text" class="form-control form-control-lg" name="USERNAME" placeholder="Username" id="USERNAME" autofocus required value="{{ old('USERNAME') }}" aria-label="USERNAME">
                     </div>
                     <div class="mb-3">
-                      <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" required aria-label="Password">
+                      <input type="password" class="form-control form-control-lg" name="password" id="password"  placeholder="Password" required aria-label="password">
                     </div>
                     <button class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit">Login</button>
                   

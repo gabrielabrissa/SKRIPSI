@@ -21,8 +21,8 @@
               <ul class="list-group">
                 <li class="list-group-item border-0 d-flex p-4 mb-2 bg-light border-radius-lg">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-2 text-sm">{{ date('d F Y', strtotime($p->Tanggal)) }}</h6>
-                    <span class="mb-1 text-xs">{{$p->Subjek }}
+                    <h6 class="mb-2 text-sm">{{ date('d F Y', strtotime($p->TANGGAL)) }}</h6>
+                    <span class="mb-1 text-xs">{{$p->SUBJEK }}
                   </div>
                   <div class="ms-auto text-end">                  
                   <button type="button" class="btn btn-link btn-icon-only btn-rounded btn-sm" data-toggle="modal" data-target="#modal6{{ $p->ID }}"><i class="ni ni-bold-right" ></i></button>

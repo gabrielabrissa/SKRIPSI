@@ -75,10 +75,10 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$no }}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($p->Tanggal)) }}</span>
+                                <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($p->TANGGAL)) }}</span>
                             </td>
                             <td class="align-middle text-left">
-                                <span class="text-secondary text-xs font-weight-bold">{{$p->Subjek }}</span>
+                                <span class="text-secondary text-xs font-weight-bold">{{$p->SUBJEK }}</span>
                             </td>
                             <td class="align-middle text-center">
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal6{{ $p->ID }}">Detail</button>

@@ -13,20 +13,33 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('username',50);
-            $table->unsignedInteger('id_roleuser');
-            $table->foreign('id_roleuser')
-            ->references('id_roleuser')
-            ->on('role_user')
+        Schema::create('user', function (Blueprint $table) {
+            
+            $table->integer('ID_USER',11)->autoIncrement();
+            $table->integer('ID_ROLEUSER');
+            $table->foreign('ID_ROLEUSER')->references('ID_ROLEUSER')->on('role_user')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('USERNAME',30);
+            $table->string('USER_EMAIL',320);
+            $table->string('PASSWORD',100);
+            $table->integer('SUPP_ID')->nullable();
+            $table->foreign('SUPP_ID')->references('SUPP_ID')->on('sys_supplier')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->string('RESET_FLAG',1)->default('N');
+            $table->string('ACTIVE_FLAG',1)-> default('Y');
+            $table->integer('ORG_ID')->nullable();
+            $table->string('APPROVED_BY',10)->nullable();
+            $table->date('APPROVED_DATE')->nullable();
+            $table->integer('CREATED_BY')->nullable();
+            $table->date('CREATION_DATE')->nullable();
+            $table->integer('LAST_UPDATED_BY')->nullable();
+            $table->date('LAST_UPDATED_DATE')->nullable();
+
+            
+            
+            
         });
     }
 

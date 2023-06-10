@@ -23,12 +23,10 @@ class AturPemberitahuanController extends Controller
 
     public function save_pemberitahuan(Request $request)
     {
-        $ambil = auth()->user()->id;
-        $userdata =  User::find($ambil);
         DB::table('pemberitahuan')->insert([
-            'Tanggal' => date('Y-m-d H:i:s'),
-            'Subjek' => $request->subjek,
-            'Detail' => $request->detail_pemberitahuan,
+            'TANGGAL' => date('Y-m-d H:i:s'),
+            'SUBJEK' => $request->subjek,
+            'DETAIL' => $request->detail_pemberitahuan,
         ]);
         return redirect('/aturpemberitahuan');
     }

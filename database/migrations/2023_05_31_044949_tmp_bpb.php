@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ttf_data_bpb', function (Blueprint $table) {
+        Schema::create('tmp_bpb', function (Blueprint $table) {
             $table->integer('ID',11)->autoIncrement();
             $table->bigInteger('BPB_ID');
             $table->string('BPB_NUMBER',45);
@@ -25,9 +25,7 @@ return new class extends Migration
             $table->string('BRANCH_CODE',6);
             $table->integer('VENDOR_SITE_ID');//primary key ditable oracle
             $table->string('VENDOR_SITE_CODE',10);
-            $table->string('USED_FLAG',1)->default('N');
-            $table->date('LAST_UPDATE_DATE')-> nullable();
-            $table->integer('LAST_UPDATE_BY')->nullable();
+            $table->string('USED_FLAG',1);
             $table->string('DC_CODE',1)->default('Y'); //kode gudang
             $table->string('FLAG_PPN',1)->default('Y'); 
         });

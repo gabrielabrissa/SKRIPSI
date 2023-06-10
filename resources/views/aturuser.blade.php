@@ -10,7 +10,7 @@
 @endsection
 
 @section('body')
-
+     
 <!-- Tabel TTF -->
 <div class="container-fluid py-4 px-0">
       <div class="row">
@@ -18,8 +18,8 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
               <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal5">Add User</button>
-
+                <a href="/aturuser/adduser" class="btn btn-primary btn-sm">Add User</a>
+               
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table table-bordered -mb-1">
@@ -39,25 +39,25 @@
                   @foreach($usr as $u)
                   <tr>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{ $u->username}}</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ $u->USERNAME}}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{$u->email }}</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{$u->USER_EMAIL }}</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($u->created_at)) }}</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($u->CREATION_DATE)) }}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{$u->nama_role}} </span>
+                        <span class="text-secondary text-xs font-weight-bold">{{$u->NAMA_ROLE}} </span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{$u->active_flag}}</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{$u->ACTIVE_FLAG}}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{$u->reset_flag}}</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{$u->RESET_FLAG}}</span>
                       </td>
                       <td class="align-middle text-center">
                       <a class="text-center" href=""><button type="button" class="btn btn-enabled">Edit</button></a>

@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -12,20 +11,16 @@ class LoginController extends Controller
     {
         return view('login');
     }
-    public function userlogin(){
-        $ambil = auth()->user()->id;
-        $user = User::where();
-    }
 
     public function authenticate(Request $request){
         $credentials = $request->validate([
-                'username' => 'required',
+                'USERNAME' => 'required',
                 'password' => 'required'
         ]);
 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            if(auth()->user()->role->hak_akses == 1){
+            if(auth()->user()->role->ID_ROLEUSER == 1){
                 return redirect() ->intended('/home');
             }
             else{

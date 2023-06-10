@@ -14,13 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('sys_mapp_supp', function (Blueprint $table) {
-            $table->id('ID');
+            $table->integer('ID',11)->autoIncrement();
             $table->integer('USER_ID');
-            $table->string('SUPP_SITE_CODE');
-            $table->string('BRANCH_CODE');
+            $table->foreign('USER_ID')->references('ID_USER')->on('users')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->string('SUPP_SITE_CODE',6);
+            $table->string('BRANCH_CODE',6);
             $table->date('DATE');
-            $table->string('STATUS');
-            $table->string('TRANSFER_FLAG');
+            $table->string('STATUS',1)->default('Y');
+            $table->string('TRANSFER_FLAG',1)->nullable();
         });
     }
 

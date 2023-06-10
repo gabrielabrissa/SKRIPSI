@@ -21,7 +21,7 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center text-white">
-            <span class="d-sm-inline d-none">{{ auth()->user()-> username }}</span>
+            <span class="d-sm-inline d-none">{{ auth()->user()-> USERNAME }}</span>
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">

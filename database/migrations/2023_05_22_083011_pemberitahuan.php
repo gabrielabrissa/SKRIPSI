@@ -14,11 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pemberitahuan', function (Blueprint $table) {
-            $table->id('ID');
-            $table->integer('No');
-            $table->date('Tanggal');
-            $table->string('Subjek');
-            $table->longText('Detail');
+            $table->integer('ID',11)->autoIncrement();
+            $table->date('TANGGAL');
+            $table->string('SUBJEK');
+            $table->longText('DETAIL');
         });
     }
 

@@ -1,4 +1,4 @@
-<div id="modal4" class="modal fade" data-backdrop="static" tabindex="-1">
+<div id="modal4{{ $c->ID2 }}" class="modal fade" data-backdrop="static" tabindex="-1">
 <div class="modal-dialog modal-lg">
   <div class="modal-content ">
                 <div class="modal-header bg-light">
@@ -16,36 +16,43 @@
                               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">No</th>  
                               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nomor BPB  </th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Due Date BPB </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">FLAG GO </th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">FLAG PPN </th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">DPP BPB  </th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">PPN BPB</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Action</th>
                               </tr>
                             </thead>
                             <tbody>
+                              <?php $no=1;?>
+                              @foreach($bpb as $b)
                               <tr>
                                 <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold"></span>
+                                  <span class="text-secondary text-xs font-weight-bold">{{$no }}</span>
                                 </td>
                                 <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold"></span>
+                                  <span class="text-secondary text-xs font-weight-bold">{{ $b->BPB_NUMBER }}</span>
                                 </td>
                                 <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold"></span>
+                                  <span class="text-secondary text-xs font-weight-bold">{{ $b->BPB_DATE }}</span>
                                 </td>
                                 <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold"></span>
+                                  <span class="text-secondary text-xs font-weight-bold">{{ $b->FLAG_PPN }}</span>
                                 </td>
                                 <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold"></span>
+                                  <span class="text-secondary text-xs font-weight-bold">{{ $b->BPB_DPP }}</span>
                                 </td>
                                 <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold"></span>
+                                  <span class="text-secondary text-xs font-weight-bold">{{ $b->BPB_TAX }}</span>
                                 </td>
                                 <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold"></span>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Y" id="checklistbpb" >
+                                    </label>
+                                  </div>
                                 </td>
                               </tr>
+                              <?php $no++;?>
+                              @endforeach
                             </tbody>
                           </table>
                         </div>

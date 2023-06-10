@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ttf_headers', function (Blueprint $table) {
-            $table->integer('TTF_ID',11)->autoIncrement();
+        Schema::create('tmp_fp', function (Blueprint $table) {
+            $table->integer('TMP_TTF_ID',11)->autoIncrement();
+            $table->integer('TTF_ID');
             $table->string('BRANCH_CODE',6);
             $table->string('VENDOR_SITE_CODE',6);
             $table->string('TTF_NUM',45)->unique();
@@ -25,10 +26,8 @@ return new class extends Migration
             $table->date('TTF_GIRO_DATE');
             $table->integer('ORG_ID')->nullable();
             $table->string('SOURCE',45);
-            $table->integer('REVIEWED_BY')->nullable();
-            $table->date('REVIEWED_DATE')->nullable();
-            $table->integer('CREATED_BY')->nullable();
-            $table->date('CREATED_DATE')->nullable();
+            $table->integer('REVIEWED_BY');
+            $table->integer('CREATED_BY');
             $table->date('LAST_UPDATE_DATE')->nullable();
             $table->integer('LAST_UPDATE_BY')->nullable();
             $table->string('MEMO_NUM',45);
@@ -40,6 +39,15 @@ return new class extends Migration
             $table->float('SUM_TAX_BPB',14,2);
             $table->float('SELISIH_DPP',14,2);
             $table->float('SELISIH_TAX',14,2);
+            $table->integer('TTF_BPB_ID');
+            $table->integer('TTF_FP_ID');
+            $table->string('ACTIVE_FLAG',1);
+            $table->string('FP_TYPE',45);
+            $table->date('FP_DATE');
+            $table->float('FP_DPP_AMT',14,2);
+            $table->float('FP_TAX_AMT',14,2);
+            $table->string('USED_FLAG',1);
+    
         });
     }
 
@@ -51,6 +59,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        
     }
 };

@@ -29,7 +29,7 @@
           </a>
         </li>
       </div>
-        <div class= "border-top border-muted">
+        {{-- <div class= "border-top border-muted">
         <li class="nav-item {{($title === "kuotaharian") ? 'bg-light' : ''}}">
         <a class="nav-link {{($title === "kuotaharian") ? 'active' : ''}}"  href="/kuotaharian">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -38,8 +38,8 @@
             <span class="nav-link-text ms-1">Kuota Harian Supplier</span>
           </a>
         </li>
-        </div>
-        <div class= "border-top border-muted">
+        </div> --}}
+        {{-- <div class= "border-top border-muted">
         <li class="nav-item {{($title === "datattf") ? 'bg-light' : ''}}">
         <a class="nav-link {{($title === "datattf") ? 'active' : ''}}"  href="/datattf">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -48,8 +48,8 @@
             <span class="nav-link-text ms-1">Data TTF Supplier</span>
           </a>
         </li>
-        </div>
-        <div class= "border-top border-muted">
+        </div> --}}
+        {{-- <div class= "border-top border-muted">
         <li class="nav-item {{($title === "aturlimit") ? 'bg-light' : ''}}">
         <a class="nav-link {{($title === "aturlimit") ? 'active' : ''}}"  href="/aturlimit">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -58,8 +58,8 @@
             <span class="nav-link-text ms-1">Atur Limit TTF</span>
           </a>
         </li>
-        </div>
-        <div class= "border-top border-muted">
+        </div> --}}
+        {{-- <div class= "border-top border-muted">
         <li class="nav-item {{($title === "monitoringfp") ? 'bg-light' : ''}}">
         <a class="nav-link {{($title === "monitoringfp") ? 'active' : ''}}"  href="/monitoringfp">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -68,7 +68,7 @@
             <span class="nav-link-text ms-1">Monitoring File FP</span>
           </a>
         </li>
-        </div>
+        </div> --}}
         <div class= "border-top border-muted">
         <li class="nav-item {{($title === "laporanttf") ? 'bg-light' : ''}}">
         <a class="nav-link {{($title === "laporanttf") ? 'active' : ''}}"  href="/laporanttf">

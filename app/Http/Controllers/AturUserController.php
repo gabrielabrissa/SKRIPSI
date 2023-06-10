@@ -11,15 +11,26 @@ class AturUserController extends Controller
 {
     public function aturuser()
     {
-        $ambil = auth()->user()->id;
-        $this->authorize('admin');
+       
         $usr = DB::table('users')
             ->join('role_user', 'users.id_roleuser', '=', 'role_user.id_roleuser')
+            ->where('users.id_roleuser','=','1')
             ->get();
         return view('aturuser', [
             "title" => "aturuser",
-            'userdata' =>  User::find($ambil),
             'usr' => $usr
+        ]);
+    }
+
+    public function adduser(){
+        $ambil = auth()->user()->id;
+        $supp = DB::table('sys_supplier')
+        ->get();
+       
+        return view('adduser', [
+            "title" => "aturuser",
+            'userdata' =>  User::find($ambil),
+            'supp' => $supp,
         ]);
     }
 }

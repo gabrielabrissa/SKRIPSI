@@ -14,7 +14,7 @@ use App\Http\Controllers\LaporanTTFController;
 use App\Http\Controllers\MonitoringFileController;
 
 
-Route::get('/index2', function () {return view('welcome');});
+// Route::get('/index2', function () {return view('welcome');});
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('/', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
@@ -24,7 +24,8 @@ Route::group(['middleware' => ['supplier']], function () {
     Route::get('/home', [HomeController::class, 'index']);
     Route::get('/home/jk', [HomeController::class, 'downloadJK']);
     Route::get('/inputttf', [InputTTFController::class, 'inputttf']);
-    Route::get('/inputfp', [InputTTFController::class, 'inputfp']);
+    Route::get('/inputttf/pilihcabang/{id2}', [InputTTFController::class, 'pilihCabang'])->name('inputttf.pilihCabang');
+    // Route::post('/inputttf', [InputTTFController::class, 'simpan_bpb2']);
     Route::get('/download', [DownloadController::class, 'download']);
 });
 
@@ -34,6 +35,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/homeadmin/jk', [HomeController::class, 'downloadJK']);
     Route::get('/aturlimit', [AturLimitController::class, 'aturlimit']);
     Route::get('/aturuser', [AturUserController::class, 'aturuser']);
+    Route::get('/aturuser/adduser', [AturUserController::class, 'adduser']);
     Route::get('/datattf', [DataTTFController::class, 'datattf']);
     Route::get('/datasup', [DataTTFController::class, 'datasup']);
     Route::get('/datalampfp', [DataTTFController::class, 'datalampfp']);

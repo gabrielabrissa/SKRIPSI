@@ -16,7 +16,7 @@ class CekRoleAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!auth()->check() || auth()->user()->id_roleuser !== 2){
+        if(!auth()->check() || !auth()->user()->ID_ROLEUSER === '2'){
             abort(403);
         }
         return $next($request);

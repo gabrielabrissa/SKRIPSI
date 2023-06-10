@@ -18,28 +18,39 @@
                       <th class="fw-semibold  text-xs font-weight-bolder ">Action </th>
                     </tr>
                   </thead>
+                 
+                  <?php $no=1;?>
+                  @foreach($cbg as $c)
                   <tbody>
                     <tr>
                       <td class="align-middle text-center">
-                        <span class="fw-semibold text-xs font-weight-bolder ">1</span>
+                        <span class="fw-semibold text-xs font-weight-bolder ">{{$no }}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="fw-semibold text-xs font-weight-bold">SA01</span>
+                        <span class="fw-semibold text-xs font-weight-bold">{{ $c->SUPP_SITE_CODE }}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">PT IMC IND</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ $c->SUPP_SITE_ALT_NAME }}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">JAKARTA</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ $c->BRANCH_CODE }}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">10</span>
+                        <span class="text-secondary text-xs font-weight-bold">{{ $c->jumlah  }}</span>
                       </td>
                       <td class="align-middle text-center">
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal2">Pilih</button>
-                      </td>
+                      {{-- <button data-path="{{ route('inputttf',$c->SUPP_SITE_ID) }}" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal2">Pilih</button> --}}
+                      {{-- <a href="javascript:void(0)" id="pilihCbg" data-url="{{ route('inputttf.pilihCabang', $c->SUPP_SITE_ID) }}" data-bs-toggle="modal" data-bs-target="#modal2" class="btn btn-info">Pilih</a> --}}
+                      {{-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal2{{ $c->ID2 }}">Pilih</button> --}}
+                      {{-- <a href="{{ route('inputttf.pilihCabang', [$c->SUPP_SITE_ID]) }}" class="btn btn-danger btn-flat" style="width:90px;" data-bs-target="#modal2" data-toggle="modal">Yes</a>   --}}
+                      {{-- <a href="javascript:void(0)" type="button" class="btn btn-primary btn-sm" data-id="{{$c->SUPP_SITE_ID}}">Pilih</a> --}}
+                      <a data-toggle="modal" data-id="{{$c->SUPP_SITE_ID}}" data-toggle="modal" title="Add this item" class="openModal btn btn-primary btn-sm" href="#modal2">Pilih</a>
+                    </td>
                     </tr>
                   </tbody>
+                  <?php $no++;?>
+                  
+                  @endforeach
                 </table>
               </div>
                 </div>
@@ -52,3 +63,11 @@
 </div>
 
 @include('Modal.tambahttfModal') 
+{{-- 
+<script type="text/javascript">
+  $(document).on('click', '.openModal', function () {
+        var id = $(this).data('SUPP_SITE_ID');
+        $('#modal2').modal('show');
+    })
+    
+</script> --}}

@@ -1,4 +1,4 @@
-<div id="modal3" class="modal fade" data-backdrop="static" tabindex="-1">
+<div id="modal3{{ $c->ID2 }}" class="modal fade" data-backdrop="static" tabindex="-1">
 <div class="modal-dialog modal-lg ">
             <div class="modal-content ">
                 <div class="modal-header bg-light">
@@ -92,7 +92,7 @@
          <div class="card">
           <div class="card-header">
               <div class="d-flex align-items-center">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal4">Add BPB</button>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal4{{ $c->ID2 }}">Add BPB</button>
                 <button class="btn btn-danger btn-sm ms-1">Remove</button>
               </div>
             </div>
@@ -133,6 +133,7 @@
       </div>
       </div>
     </div>
+       
     <!--  End Tabel BPB -->
       <div class="modal-footer ">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
@@ -140,6 +141,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>
 
