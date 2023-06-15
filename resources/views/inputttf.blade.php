@@ -308,19 +308,17 @@
                       <div class="form-group">
                         <h6 class="font-weight-bolder mb-2">Faktur Pajak</h6>
                         <div class="row mb-0">
-                          <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">No
+                          <label class="col-sm-3 col-form-label col-form-label-sm text-primary">No
                             FP</label>
                           <div class="col-sm-5">
-                            <input type="text" class="form-control form-control-sm" id="colFormLabelSm"
-                              placeholder="Pilih No Faktur">
+                            <input type="text" class="form-control form-control-sm" placeholder="Pilih No Faktur">
                           </div>
                           <div class="col-auto">
                             <button type="submit" class="btn btn-secondary mb-3 btn-sm">Pilih No FP</button>
                           </div>
                         </div>
                         <div class="row mb-0">
-                          <label for="colFormLabelSm"
-                            class="col-sm-3 col-form-label col-form-label-sm text-primary">File FP</label>
+                          <label class="col-sm-3 col-form-label col-form-label-sm text-primary">File FP</label>
                           <div class="col-sm-5">
                             <input type="file" class="form-control-file form-control-sm" id="exampleFormControlFile1">
                           </div>
@@ -329,11 +327,9 @@
                           </div>
                         </div>
                         <div class="row mb-2">
-                          <label for="colFormLabelSm"
-                            class="col-sm-3 col-form-label col-form-label-sm text-primary">Tanggal FP</label>
+                          <label class="col-sm-3 col-form-label col-form-label-sm text-primary">Tanggal FP</label>
                           <div class="col-sm-5">
-                            <input type="date" class="form-control form-control-sm" id="colFormLabelSm"
-                              placeholder="date">
+                            <input type="date" class="form-control form-control-sm" placeholder="date">
                           </div>
                         </div>
 
@@ -342,35 +338,29 @@
                         <div class="form-group">
                           <h6 class="font-weight-bolder mb-2 mt-3">Summary</h6>
                           <div class="row ">
-                            <label for="colFormLabelSm"
-                              class="col-sm-2 col-form-label col-form-label-sm text-primary">DPP FP</label>
+                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary">DPP FP</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                              <input type="text" class="form-control form-control-sm">
                             </div>
-                            <label for="colFormLabelSm"
-                              class="col-sm-2 col-form-label col-form-label-sm text-primary">Total DPP BPB</label>
+                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Total DPP BPB</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                              <input type="text" class="form-control form-control-sm">
                             </div>
-                            <label for="colFormLabelSm"
-                              class="col-sm-2 col-form-label col-form-label-sm text-primary">Selisih DPP</label>
+                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Selisih DPP</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                              <input type="text" class="form-control form-control-sm">
                             </div>
-                            <label for="colFormLabelSm"
-                              class="col-sm-2 col-form-label col-form-label-sm text-primary">PPN FP</label>
+                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary">PPN FP</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                              <input type="text" class="form-control form-control-sm">
                             </div>
-                            <label for="colFormLabelSm"
-                              class="col-sm-2 col-form-label col-form-label-sm text-primary">Total PPN BPB</label>
+                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Total PPN BPB</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                              <input type="text" class="form-control form-control-sm">
                             </div>
-                            <label for="colFormLabelSm"
-                              class="col-sm-2 col-form-label col-form-label-sm text-primary">Selisih PPN</label>
+                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Selisih PPN</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                              <input type="text" class="form-control form-control-sm">
                             </div>
                           </div>
                         </div>
@@ -409,24 +399,7 @@
                             </th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td class="align-middle text-center">
-                              <span class="text-secondary text-xs font-weight-bold"></span>
-                            </td>
-                            <td class="align-middle text-center">
-                              <span class="text-secondary text-xs font-weight-bold"></span>
-                            </td>
-                            <td class="align-middle text-center">
-                              <span class="text-secondary text-xs font-weight-bold"></span>
-                            </td>
-                            <td class="align-middle text-center">
-                              <span class="text-secondary text-xs font-weight-bold"></span>
-                            </td>
-                            <td class="align-middle text-center">
-                              <span class="text-secondary text-xs font-weight-bold"></span>
-                            </td>
-                          </tr>
+                        <tbody id="selectedBPB">
                         </tbody>
                       </table>
                     </div>
@@ -483,7 +456,7 @@
             </div>
           </div>
           <div class="modal-footer ">
-            <button type="button" class="btn btn-primary btn-sm">Tambah BPB</button>
+            <button type="button" class="btn btn-primary btn-sm" id="addBPB">Tambah BPB</button>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
 
           </div>
@@ -493,13 +466,17 @@
   </div>
 
   <script>
+    var appUrl = "{{env('APP_URL')}}";
     var selectedBranchCode = null;
+
+    var optionsBPB = []; // array of BPB from api
+    var selectedBPB = []; // array of selected BPB
 
     $('#modal2').on('shown.bs.modal', function (e) {
       const branchCode = $(e.relatedTarget).data('branch-code');
       selectedBranchCode = branchCode;
     //   alert(`modal 2 opened with id ${id}`)
-      fetch(`http://localhost:8000/get-sys-supp-site?` + new URLSearchParams({
+      fetch(`${appUrl}/get-sys-supp-site?` + new URLSearchParams({
         supp_branch_code: branchCode
         })
       )
@@ -525,7 +502,7 @@
     $('#modal4').on('shown.bs.modal', function (e) {
         const branchCode = selectedBranchCode;
 
-        fetch(`http://localhost:8000/get-ttf-data-bpb?` + new URLSearchParams({
+        fetch(`${appUrl}/get-ttf-data-bpb?` + new URLSearchParams({
             supp_branch_code: branchCode
         }))
         .then(response => response.json())
@@ -554,7 +531,7 @@
               </td>
               <td class="align-middle text-center">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Y" id="checklistbpb">
+                  <input class="form-check-input checklist-bpb" type="checkbox" id="${el.BPB_NUMBER}">
                   </label>
                 </div>
               </td>
@@ -563,12 +540,59 @@
 
             $('#body-modal4').append(row);
           })
+
+          optionsBPB = data;
         }).
         catch(error => alert(error))
     })
 
+
+
+    $(document).on('change', '.checklist-bpb', function(e) {
+        const isChecked = $(this).is(':checked');
+        const bpbNumber = $(this).attr('id');
+
+        if (isChecked) {
+            const selected = optionsBPB.find(el => el.BPB_NUMBER === bpbNumber);
+            // check if selectedBPB already has the selected BPB
+            const isExist = selectedBPB.find(el => el.BPB_NUMBER === bpbNumber);
+            if (!isExist) {
+                selectedBPB.push(selected);
+            }
+        } else {
+            const index = selectedBPB.findIndex(el => el.BPB_NUMBER === bpbNumber);
+            selectedBPB.splice(index, 1);
+        }
+
+        console.log('selectedBPB', selectedBPB)
+    })
+
     $('#modal4').on('hidden.bs.modal', function (e) {
         $('#body-modal4').empty();
+        $('#selectedBPB').empty();
+
+        selectedBPB.forEach(el => {
+            let row = `
+              <tr>
+                <td class="align-middle text-center">
+                  ${el.BPB_NUMBER}
+                </td>
+                <td class="align-middle text-center">
+                  ${el.BPB_DATE}
+                </td>
+                <td class="align-middle text-center">
+                  ${el.BPB_DPP}
+                </td>
+                <td class="align-middle text-center">
+                  ${el.BPB_TAX}
+                </td>
+                <td class="align-middle text-center">
+                  <span class="text-secondary text-xs font-weight-bold"></span>
+                </td>
+              </tr>
+              `
+            $('#selectedBPB').append(row);
+        })
     })
   </script>
   @endsection
