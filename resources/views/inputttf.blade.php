@@ -298,7 +298,7 @@
                       <div class="form-group">
                         <h6 class="font-weight-bolder mb-2">Tipe Faktur Pajak</h6>
                         <div class="col-sm-5">
-                          <select class="form-select" aria-label="Pilih Tipe FP">
+                          <select id="selection" onchange="disableFP(this)" class="form-select" aria-label="Pilih Tipe FP">
                             <option selected>Pilih Tipe FP</option>
                             <option value="1">Standart</option>
                             <option value="2">Tanpa Faktur Pajak</option>
@@ -308,28 +308,32 @@
                       <div class="form-group">
                         <h6 class="font-weight-bolder mb-2">Faktur Pajak</h6>
                         <div class="row mb-0">
-                          <label class="col-sm-3 col-form-label col-form-label-sm text-primary">No
+                          <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">No
                             FP</label>
                           <div class="col-sm-5">
-                            <input type="text" class="form-control form-control-sm" placeholder="Pilih No Faktur">
+                            <input type="text" class="form-control form-control-sm" id="nofaktur"
+                              placeholder="Pilih No Faktur">
                           </div>
                           <div class="col-auto">
                             <button type="submit" class="btn btn-secondary mb-3 btn-sm">Pilih No FP</button>
                           </div>
                         </div>
                         <div class="row mb-0">
-                          <label class="col-sm-3 col-form-label col-form-label-sm text-primary">File FP</label>
+                          <label for="colFormLabelSm"
+                            class="col-sm-3 col-form-label col-form-label-sm text-primary">File FP</label>
                           <div class="col-sm-5">
-                            <input type="file" class="form-control-file form-control-sm" id="exampleFormControlFile1">
+                            <input type="file" class="form-control-file form-control-sm" id="filefaktur">
                           </div>
                           <div class="col-auto">
                             <button type="submit" class="btn btn-secondary mb-3 btn-sm">Cek</button>
                           </div>
                         </div>
                         <div class="row mb-2">
-                          <label class="col-sm-3 col-form-label col-form-label-sm text-primary">Tanggal FP</label>
+                          <label for="colFormLabelSm"
+                            class="col-sm-3 col-form-label col-form-label-sm text-primary">Tanggal FP</label>
                           <div class="col-sm-5">
-                            <input type="date" class="form-control form-control-sm" placeholder="date">
+                            <input type="date" class="form-control form-control-sm" id="tanggalfaktur"
+                              placeholder="date">
                           </div>
                         </div>
 
@@ -466,7 +470,7 @@
   </div>
 
   <script>
-    var appUrl = "{{env('APP_URL')}}";
+    var appUrl = "{{env('http://ttfcp.test/get-ttf-data-bpb?')}}";
     var selectedBranchCode = null;
 
     var optionsBPB = []; // array of BPB from api
@@ -575,24 +579,38 @@
             let row = `
               <tr>
                 <td class="align-middle text-center">
-                  ${el.BPB_NUMBER}
+                  <span class="text-secondary text-xs font-weight-bold">${el.BPB_NUMBER}</span>
                 </td>
                 <td class="align-middle text-center">
-                  ${el.BPB_DATE}
+                  <span class="text-secondary text-xs font-weight-bold">${el.BPB_DATE}</span>
                 </td>
                 <td class="align-middle text-center">
-                  ${el.BPB_DPP}
+                  <span class="text-secondary text-xs font-weight-bold">${el.BPB_DPP}</span>
                 </td>
                 <td class="align-middle text-center">
-                  ${el.BPB_TAX}
+                  <span class="text-secondary text-xs font-weight-bold">${el.BPB_TAX}</span>
                 </td>
                 <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold"></span>
+                  <a class="openModal btn btn-danger btn-sm" >Delete</a>
                 </td>
+                
               </tr>
               `
             $('#selectedBPB').append(row);
         })
     })
+
+    function disableFP(faktur) {
+    console.log(faktur.value)
+    if(faktur.value == 1){
+      document.getElementById("nofaktur").disabled = false;
+      document.getElementById("filefaktur").disabled = false;
+      document.getElementById("tanggalfaktur").disabled = false;
+    }else {
+      document.getElementById("nofaktur").disabled = true;
+      document.getElementById("filefaktur").disabled = true;
+      document.getElementById("tanggalfaktur").disabled = true;
+    }
+  }
   </script>
   @endsection
