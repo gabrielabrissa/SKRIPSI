@@ -344,27 +344,27 @@
                           <div class="row ">
                             <label class="col-sm-2 col-form-label col-form-label-sm text-primary">DPP FP</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm">
+                              <input type="text" class="sum_TTF form-control form-control-sm" id= "DPP_FP">
                             </div>
                             <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Total DPP BPB</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm">
+                              <input type="text" class="sum_TTF_BPB form-control form-control-sm" id= "Total_DPP_BPB">
                             </div>
-                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Selisih DPP</label>
+                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary ">Selisih DPP</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm">
+                              <input type="text" class="sum_TTF form-control form-control-sm"  id= "Selisih_DPP">
                             </div>
                             <label class="col-sm-2 col-form-label col-form-label-sm text-primary">PPN FP</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm">
+                              <input type="text" class="sum_TTF form-control form-control-sm" id= "PPN_FP">
                             </div>
                             <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Total PPN BPB</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm">
+                              <input type="text" class="sum_TTF_BPB form-control form-control-sm" id= "Total_PPN_BPB">
                             </div>
                             <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Selisih PPN</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="form-control form-control-sm">
+                              <input type="text" class="sum_TTF form-control form-control-sm" id= "Selisih_PPN">
                             </div>
                           </div>
                         </div>
@@ -383,7 +383,7 @@
                     <div class="d-flex align-items-center">
                       <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal4">Add
                         BPB</button>
-                      <button class="btn btn-danger btn-sm ms-1">Remove</button>
+                      {{-- <button class="btn btn-danger btn-sm ms-1">Remove</button> --}}
                     </div>
                   </div>
                   <div class="card-body px-0 pt-0 pb-2">
@@ -448,7 +448,7 @@
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">DPP BPB
                           </th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">PPN BPB</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Action</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Add BPB</th>
                         </tr>
                       </thead>
                       <tbody id="body-modal4">
@@ -460,8 +460,8 @@
             </div>
           </div>
           <div class="modal-footer ">
-            <button type="button" class="btn btn-primary btn-sm" id="addBPB">Tambah BPB</button>
-            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+            {{-- <button type="button" class="btn btn-primary btn-sm" id="addBPB">Tambah BPB</button> --}}
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
 
           </div>
         </div>
@@ -470,11 +470,13 @@
   </div>
 
   <script>
-    var appUrl = "{{env('http://ttfcp.test/get-ttf-data-bpb?')}}";
+    var appUrl = "{{env('http://ttf.test')}}";
     var selectedBranchCode = null;
 
     var optionsBPB = []; // array of BPB from api
     var selectedBPB = []; // array of selected BPB
+    var sumBPB_DPP = 0;
+    var sumBPB_PPN = 0;
 
     $('#modal2').on('shown.bs.modal', function (e) {
       const branchCode = $(e.relatedTarget).data('branch-code');
@@ -552,7 +554,7 @@
 
 
 
-    $(document).on('change', '.checklist-bpb', function(e) {
+   $(document).on('change', '.checklist-bpb', function(e) {
         const isChecked = $(this).is(':checked');
         const bpbNumber = $(this).attr('id');
 
@@ -562,13 +564,21 @@
             const isExist = selectedBPB.find(el => el.BPB_NUMBER === bpbNumber);
             if (!isExist) {
                 selectedBPB.push(selected);
-            }
+                sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> sum + current,0);
+                sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> sum + current,0);
+                }
+                           
         } else {
             const index = selectedBPB.findIndex(el => el.BPB_NUMBER === bpbNumber);
             selectedBPB.splice(index, 1);
+            sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> current - sum,0);
+            sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> current - sum,0);
+            
         }
 
         console.log('selectedBPB', selectedBPB)
+        console.log('sumBPB_DPP', sumBPB_DPP)
+        console.log('sumBPB_PPN', sumBPB_PPN)
     })
 
     $('#modal4').on('hidden.bs.modal', function (e) {
@@ -577,7 +587,7 @@
 
         selectedBPB.forEach(el => {
             let row = `
-              <tr>
+              <tr id="row">
                 <td class="align-middle text-center">
                   <span class="text-secondary text-xs font-weight-bold">${el.BPB_NUMBER}</span>
                 </td>
@@ -591,14 +601,27 @@
                   <span class="text-secondary text-xs font-weight-bold">${el.BPB_TAX}</span>
                 </td>
                 <td class="align-middle text-center">
-                  <a class="openModal btn btn-danger btn-sm" >Delete</a>
+                  <button class="btn btn-danger btn-sm" onclick="deleteRow()">Delete</button>
                 </td>
                 
               </tr>
               `
             $('#selectedBPB').append(row);
+            document.getElementById("Total_DPP_BPB").value = sumBPB_DPP;
+            document.getElementById("Total_PPN_BPB").value = sumBPB_PPN;
         })
     })
+
+    function deleteRow() {
+    var row = document.getElementById("row").remove();;
+    sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> sumBPB_DPP - current,0);
+    sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> sumBPB_PPN - current,0);
+
+    console.log('sumBPB_DPP', sumBPB_DPP)
+    console.log('sumBPB_PPN', sumBPB_PPN)
+    document.getElementById("Total_DPP_BPB").value = sumBPB_DPP;
+    document.getElementById("Total_PPN_BPB").value = sumBPB_PPN;
+  }
 
     function disableFP(faktur) {
     console.log(faktur.value)
