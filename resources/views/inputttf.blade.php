@@ -506,16 +506,17 @@
     })
 
     $('#modal4').on('shown.bs.modal', function (e) {
-        const branchCode = selectedBranchCode;
-
+      const branchCode = selectedBranchCode;
         fetch(`${appUrl}/get-ttf-data-bpb?` + new URLSearchParams({
             supp_branch_code: branchCode
         }))
         .then(response => response.json())
         .then(data => {
           data.forEach((el,index) => {
+            indexBPB = selectedBPB.find(ele => ele.BPB_NUMBER === el.BPB_NUMBER);
             let number = index + 1;
-            let row =`
+            let row, cb;
+            row =`
             <tr>
               <td class="align-middle text-center">
                 <span class="text-secondary text-xs font-weight-bold">${number}</span>
@@ -535,16 +536,26 @@
               <td class="align-middle text-center">
                 <span class="text-secondary text-xs font-weight-bold">${el.BPB_TAX}</span>
               </td>
-              <td class="align-middle text-center">
-                <div class="form-check">
-                  <input class="form-check-input checklist-bpb" type="checkbox" id="${el.BPB_NUMBER}">
-                  </label>
+              
+            `;
+            if(indexBPB) {
+              cb =  `<td class="align-middle text-center">
+                <div class="form-check" id="input_cb">
+                  <input class='form-check-input checklist-bpb' type='checkbox' id='${el.BPB_NUMBER}' name='cb_bpb' checked>
                 </div>
               </td>
-            </tr>
-            `;
-
+            </tr> `;
+            }else{
+              cb =  `<td class="align-middle text-center">
+                <div class="form-check" id="input_cb">
+                  <input class='form-check-input checklist-bpb' type='checkbox' id='${el.BPB_NUMBER}' name='cb_bpb'>
+                </div>
+              </td>
+            </tr> `;
+            }
+            row +=cb;
             $('#body-modal4').append(row);
+            
           })
 
           optionsBPB = data;
@@ -552,9 +563,7 @@
         catch(error => alert(error))
     })
 
-
-
-   $(document).on('change', '.checklist-bpb', function(e) {
+  $(document).on('change', '.checklist-bpb', function(e) {
         const isChecked = $(this).is(':checked');
         const bpbNumber = $(this).attr('id');
 
@@ -562,7 +571,8 @@
             const selected = optionsBPB.find(el => el.BPB_NUMBER === bpbNumber);
             // check if selectedBPB already has the selected BPB
             const isExist = selectedBPB.find(el => el.BPB_NUMBER === bpbNumber);
-            if (!isExist) {
+            if (!isExist) {      
+              
                 selectedBPB.push(selected);
                 sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> sum + current,0);
                 sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> sum + current,0);
@@ -579,7 +589,10 @@
         console.log('selectedBPB', selectedBPB)
         console.log('sumBPB_DPP', sumBPB_DPP)
         console.log('sumBPB_PPN', sumBPB_PPN)
+        document.getElementById("Total_DPP_BPB").value = sumBPB_DPP;
+        document.getElementById("Total_PPN_BPB").value = sumBPB_PPN;
     })
+
 
     $('#modal4').on('hidden.bs.modal', function (e) {
         $('#body-modal4').empty();
@@ -601,7 +614,7 @@
                   <span class="text-secondary text-xs font-weight-bold">${el.BPB_TAX}</span>
                 </td>
                 <td class="align-middle text-center">
-                  <button class="btn btn-danger btn-sm" onclick="deleteRow()">Delete</button>
+                  <button class="bpbDelete btn btn-danger btn-sm" id ="${el.BPB_NUMBER}">Delete</button>
                 </td>
                 
               </tr>
@@ -612,16 +625,21 @@
         })
     })
 
-    function deleteRow() {
-    var row = document.getElementById("row").remove();;
-    sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> sumBPB_DPP - current,0);
-    sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> sumBPB_PPN - current,0);
+    $("#selectedBPB").on('click', '.bpbDelete', function(){
+      $(this).closest('tr').remove();  
+      const bpbNumber = $(this).attr('id');
+    const index = selectedBPB.findIndex(el => el.BPB_NUMBER === bpbNumber);
+    selectedBPB.splice(index, 1);
+    sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> sum + current,0);
+    sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> sum + current,0);
 
+    console.log('selectedBPB', selectedBPB)
     console.log('sumBPB_DPP', sumBPB_DPP)
     console.log('sumBPB_PPN', sumBPB_PPN)
     document.getElementById("Total_DPP_BPB").value = sumBPB_DPP;
     document.getElementById("Total_PPN_BPB").value = sumBPB_PPN;
-  }
+
+    })
 
     function disableFP(faktur) {
     console.log(faktur.value)
