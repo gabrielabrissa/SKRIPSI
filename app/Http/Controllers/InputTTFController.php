@@ -7,7 +7,9 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Exception;
 use Smalot\PdfParser\Parser;
 
 class InputTTFController extends Controller
@@ -124,65 +126,88 @@ class InputTTFController extends Controller
     {
         $ambil = auth()->user()->id;
         $data = $request->all();
-        foreach ($data as $d) {
-            $header = DB::table('ttf_headers')->insertGetId([
-                // 'TTF_ID' => '',
-                'BRANCH_CODE' => $d['branchcode'],
-                'VENDOR_SITE_CODE' => $d['supsitecode'],
-                'TTF_NUM' => '',
-                'TTF_DATE'=> $d['tanggal_ttf'],
-                'TTF_TYPE' => $d['typefp'],
-                'TTF_STATUS'=> 'DRAFT',
-                'TTF_RETURN_DATE'=> '',
-                'TTF_GIRO_DATE'=> '',
-                'ORG_ID'=> '',
-                'SOURCE' => '',
-                'REVIEWED_BY'=> $ambil,
-                'REVIEWED_DATE'=> $d['tanggal_ttf'],
-                'CREATED_BY'=> $ambil,
-                'CREATED_DATE'=> $d['tanggal_ttf'],
-                'LAST_UPDATE_DATE'=> $d['tanggal_ttf'],
-                'LAST_UPDATE_BY' => $d['tanggal_ttf'],
-                'MEMO_NUM' => '',
-                'JUMLAH_FP' => $d['jml_fp'],
-                'SUM_DPP_FP' => $d['ttfjumFP_DPP'],
-                'SUM_TAX_FP' => $d['ttfjumFP_PPN'],
-                'JUMLAH_BPB' => '',
-                'SUM_DPP_BPB' => $d['ttfsumBPB_DPP'],
-                'SUM_TAX_BPB' => $d['ttfsumBPB_PPN'],
-                'SELISIH_DPP' => $d['ttfselisihDPP'],
-                'SELISIH_TAX' => $d['ttfselisihPPN'],
-            ]);
-            $ttf_fp = DB::table('ttf_fp')->insert([
-            'TTF_FP_ID'=> '',
-            'TTF_ID'=> $header,
-            'FP_NUM'=> '',
-            'FP_TYPE'=> $d['listFP[0].typefp'],
-            'FP_DATE'=> $d['tanggal_ttf'],
-            'FP_DPP_AMT'=> $d[''],
-            'FP_TAX_AMT'=> $d[''],
-            'USED_FLAG'=> 'Y',
-            'CREATED_BY'=> $ambil,
-           'CREATION_DATE'=> $d['tanggal_ttf'],
-            'LAST_UPDATE_BY'=> '',
-           'LAST_UPDATE_DATE'=> '',
-            'TTF_HEADERS_TTF_ID'=> $d[''],
-            ]);
-       
-            DB::table('ttf_lines')->insert([
-                // 'TTF_LINE_ID'=> '',
-                'TTF_ID'=> $header,
-                'TTF_BPB_ID'=> $d[''],
-                'TTF_FP_ID'=> $ttf_fp,
-                'ACTIVE_FLAG'=> 'Y',
-                'CREATION_DATE'=> $d['tanggal_ttf'],
-                'CREATED_BY'=> $ambil,
-                'LAST_UPDATE_DATE'=> $d['tanggal_ttf'],
-                'LAST_UPDATE_BY'=> $d['tanggal_ttf'],
-                'TTF_HEADERS_TTF_ID'=> $d[''],
-                'TTF_FP_TTF_FP_ID'=> $d[''],
-            ]);
+        $jumBPB =0;
+
+        // return response()->json($data);
+        DB::beginTransaction();
+        try{
+            foreach ($data as $d) {
+                $ttf_num = mt_rand(100000000000,999999999999);
+                $header = DB::table('ttf_headers')->insertGetId([
+                    // 'TTF_ID' => '',
+                    'BRANCH_CODE' => $d['branchcode'],
+                    'VENDOR_SITE_CODE' => $d['supsitecode'],
+                    'TTF_NUM' => $ttf_num,
+                    'TTF_DATE'=> now()->format('Y-m-d'),
+                    'TTF_TYPE' => $d['typefp_ttf'],
+                    'TTF_STATUS'=> 'DRAFT',
+                    'TTF_RETURN_DATE'=> now()->format('Y-m-d'),
+                    'TTF_GIRO_DATE'=> now()->format('Y-m-d'),
+                    'ORG_ID'=> null,
+                    'SOURCE' => '',
+                    'REVIEWED_BY'=> $ambil,
+                    'REVIEWED_DATE'=> now()->format('Y-m-d'),
+                    'CREATED_BY'=> $ambil,
+                    'CREATED_DATE'=> now()->format('Y-m-d'),
+                    'LAST_UPDATE_DATE'=> now()->format('Y-m-d'),
+                    'LAST_UPDATE_BY' => $ambil,
+                    'MEMO_NUM' => $ttf_num,
+                    'JUMLAH_FP' => $d['jml_fp'],
+                    'SUM_DPP_FP' => $d['ttfjumFP_DPP'],
+                    'SUM_TAX_FP' => $d['ttfjumFP_PPN'],
+                    'JUMLAH_BPB' => 0,
+                    'SUM_DPP_BPB' => $d['ttfsumBPB_DPP'],
+                    'SUM_TAX_BPB' => $d['ttfsumBPB_PPN'],
+                    'SELISIH_DPP' => $d['ttfselisihDPP'],
+                    'SELISIH_TAX' => $d['ttfselisihPPN'],
+                ]);
+                foreach($d['listFP'] as $fp){
+                    $ttf_fp = DB::table('ttf_fp')->insert([
+                        // 'TTF_FP_ID'=> '',
+                        'TTF_ID'=> $header,
+                        'FP_NUM'=> $fp['noFaktur'],
+                        'FP_TYPE'=> $fp['typefp'],
+                        'FP_DATE'=> now()->format('Y-m-d'),
+                        'FP_DPP_AMT'=> $fp['DPP_Faktur'],
+                        'FP_TAX_AMT'=> $fp['PPN_Faktur'],
+                        'USED_FLAG'=> 'Y',
+                        'CREATED_BY'=> $ambil,
+                       'CREATION_DATE'=> now()->format('Y-m-d'),
+                        'LAST_UPDATE_BY'=>  $ambil,
+                       'LAST_UPDATE_DATE'=> now()->format('Y-m-d'),
+                        'TTF_HEADERS_TTF_ID'=> $header
+                        ]);
+                        foreach($fp['listOfBPB'] as $bpb){
+                            $jumBPB= $jumBPB +1;
+                            DB::table('ttf_lines')->insert([
+                                // 'TTF_LINE_ID'=> '',
+                                'TTF_ID'=> $header,
+                                'TTF_BPB_ID'=> $bpb['BPB_ID'],
+                                'TTF_FP_ID'=> $ttf_fp,
+                                'ACTIVE_FLAG'=> 'Y',
+                                'CREATION_DATE'=> now()->format('Y-m-d'),
+                                'CREATED_BY'=> $ambil,
+                                'LAST_UPDATE_DATE'=> now()->format('Y-m-d'),
+                                'LAST_UPDATE_BY'=>  $ambil,
+                                'TTF_HEADERS_TTF_ID'=> $header,
+                                'TTF_FP_TTF_FP_ID'=> $ttf_fp,
+                            ]);
+                            DB::table('ttf_data_bpb')
+                            ->where('BPB_ID',$bpb['BPB_ID'])
+                            ->update(['USED_FLAG'=>'Y']);
+                        }
+                }
+                DB::table('ttf_headers')
+                ->where('TTF_ID', $header)
+                ->update(['JUMLAH_BPB' => $jumBPB]);
+            }
+            DB::commit();
         }
+        catch(Exception $e){
+            DB::rollBack();
+            return response()->json(['message' => $e->getMessage()],500);
+        }
+        
         return response()->json(['message' => 'Data Telah di Simpan']);
     }
 

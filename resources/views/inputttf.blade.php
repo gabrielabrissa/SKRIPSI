@@ -811,10 +811,10 @@
               <span class="text-secondary text-xs font-weight-bold">${el.NAMA_PENJUAL}</span>
             </td>
             <td class="align-middle text-center">
-              <span class="text-secondary text-xs font-weight-bold">${rupiah(el.JUMLAH_DPP)}</span>
+              <span class="text-secondary text-xs font-weight-bold">${el.JUMLAH_DPP}</span>
             </td>
             <td class="align-middle text-center">
-              <span class="text-secondary text-xs font-weight-bold">${rupiah(el.JUMLAH_PPN)}</span>
+              <span class="text-secondary text-xs font-weight-bold">${el.JUMLAH_PPN}</span>
             </td>
             <td class="align-middle text-center">
                 <button class="nofpPilih btn btn-primary btn-sm" id ="${el.NOMOR_FAKTUR}">Pilih</button>
@@ -846,8 +846,8 @@
     console.log('selectedFP', selectedFP)
     console.log('jumFP_DPP', jumFP_DPP)
     console.log('jumFP_PPN', jumFP_PPN)
-    document.getElementById("DPP_FP").value = rupiah(jumFP_DPP);
-    document.getElementById("PPN_FP").value = rupiah(jumFP_PPN);
+    document.getElementById("DPP_FP").value = jumFP_DPP;
+    document.getElementById("PPN_FP").value = jumFP_PPN;
     document.getElementById("nofaktur").value = selectedFP.map((el) => el.NOMOR_FAKTUR);
     document.getElementById("tanggalfaktur").value = selectedFP.map((el) => el.TANGGAL_FAKTUR);
   })
@@ -878,10 +878,10 @@
               <span class="text-secondary text-xs font-weight-bold">${el.FLAG_PPN}</span>
             </td>
             <td class="align-middle text-center">
-              <span class="text-secondary text-xs font-weight-bold">${rupiah(el.BPB_DPP)}</span>
+              <span class="text-secondary text-xs font-weight-bold">${el.BPB_DPP}</span>
             </td>
             <td class="align-middle text-center">
-              <span class="text-secondary text-xs font-weight-bold">${rupiah(el.BPB_TAX)}</span>
+              <span class="text-secondary text-xs font-weight-bold">${el.BPB_TAX}</span>
             </td>
 
           `;
@@ -940,10 +940,10 @@
       console.log('selectedBPB', selectedBPB)
       console.log('sumBPB_DPP', sumBPB_DPP)
       console.log('sumBPB_PPN', sumBPB_PPN)
-      document.getElementById("Total_DPP_BPB").value = rupiah(sumBPB_DPP);
-      document.getElementById("Total_PPN_BPB").value = rupiah(sumBPB_PPN);
-      document.getElementById("Selisih_DPP").value = rupiah(selisihDPP);
-      document.getElementById("Selisih_PPN").value = rupiah(selisihPPN);
+      document.getElementById("Total_DPP_BPB").value = sumBPB_DPP;
+      document.getElementById("Total_PPN_BPB").value = sumBPB_PPN;
+      document.getElementById("Selisih_DPP").value = selisihDPP;
+      document.getElementById("Selisih_PPN").value = selisihPPN;
 
   })
 
@@ -965,10 +965,10 @@
     console.log('selectedBPB', selectedBPB)
     console.log('sumBPB_DPP', sumBPB_DPP)
     console.log('sumBPB_PPN', sumBPB_PPN)
-    document.getElementById("Total_DPP_BPB").value = rupiah(sumBPB_DPP);
-    document.getElementById("Total_PPN_BPB").value = rupiah(sumBPB_PPN);
-    document.getElementById("Selisih_DPP").value = rupiah(selisihDPP);
-    document.getElementById("Selisih_PPN").value = rupiah(selisihPPN);
+    document.getElementById("Total_DPP_BPB").value = sumBPB_DPP;
+    document.getElementById("Total_PPN_BPB").value = sumBPB_PPN;
+    document.getElementById("Selisih_DPP").value = selisihDPP;
+    document.getElementById("Selisih_PPN").value = selisihPPN;
   })
 
   $('#modal4').on('hidden.bs.modal', function (e) {
@@ -983,10 +983,10 @@
             <span class="text-secondary text-xs font-weight-bold">${el.BPB_DATE}</span>
           </td>
           <td class="align-middle text-center">
-            <span class="text-secondary text-xs font-weight-bold">${rupiah(el.BPB_DPP)}</span>
+            <span class="text-secondary text-xs font-weight-bold">${el.BPB_DPP}</span>
           </td>
           <td class="align-middle text-center">
-            <span class="text-secondary text-xs font-weight-bold">${rupiah(el.BPB_TAX)}</span>
+            <span class="text-secondary text-xs font-weight-bold">${el.BPB_TAX}</span>
           </td>
           <td class="align-middle text-center">
             <button class="bpbDelete btn btn-danger btn-sm" id ="${el.BPB_NUMBER}">Delete</button>
@@ -1017,11 +1017,11 @@
     }
   };
 
-  const rupiah = (number)=>{
-    return new Intl.NumberFormat({
-      style: "currency"
-    }).format(number);
-  }
+  // const rupiah = (number)=>{
+  //   return new Intl.NumberFormat({
+  //     style: "currency"
+  //   }).format(number);
+  // }
 
   // document.getElementById("console-log").addEventListener("click", function(){
   //   console.log('=============================')
