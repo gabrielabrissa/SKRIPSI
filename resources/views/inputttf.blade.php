@@ -39,7 +39,6 @@
                 <table class="table table-bordered -mb-1">
                   <thead>
                     <tr>
-                      <th class="fw-semibold text-xs font-weight-bolder "></th>
                       <th class="fw-semibold text-xs font-weight-bolder ">No</th>
                       <th class="fw-semibold  text-xs font-weight-bolder ">No TTF</th>
                       <th class="fw-semibold  text-xs font-weight-bolder ">Status</th>
@@ -51,39 +50,8 @@
                       <th class="fw-semibold  text-xs font-weight-bolder ">Action </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="align-middle text-center">
-                        <span class="mb-0 text-sm"></span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">1</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">230022129138</span>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">SUBMITTED</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">JAKARTA</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">28 September 2022</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">-</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">PT IMC IND</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <a href="#" class="text-decoration-none text-xs font-weight-bold">Download</a>
-                      </td>
-                      <td class="align-middle text-center">
-                        <a href="#" class="text-decoration-none text-xs font-weight-bold">Delete</a>
-                      </td>
-                    </tr>
+                  <tbody id="savettf">
+                   
                   </tbody>
                 </table>
                 <nav aria-label="...">
@@ -203,8 +171,10 @@
             <div class="col-12">
               <div class="card mb-0">
                 <div class="card-header pb-0">
-                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal3">Add
-                    FP</button>
+                  {{-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal3">Add
+                    FP</button> --}}
+                  <a data-branch-code="{{ $c->BRANCH_CODE }}" data-toggle="modal" title="Add this item"
+                  class="openModal btn btn-primary btn-sm" href="#modal3">Add FP</a>
                   <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#">Delete
                     FP</button>
                 </div>
@@ -213,59 +183,20 @@
                     <table class="table table-bordered -mb-1">
                       <thead>
                         <tr>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nomor BPB
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">BPB BKL
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">No. Ref
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">BPB Date
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">DPP BPB
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">PPN BPB</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">TGL GO </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">FLAG GO
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">FLAG SJ
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">FLAG PPN
-                          </th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Type Faktur
+                            Pajak </th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nomor Faktur
+                            Pajak </th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Tanggal Faktur Pajak</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">DPP Faktur Pajak </th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">PPN FakturPajak </th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Total BundelBPB </th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Selisih DPP</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Selisih PPN</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">FLAG PPN BPB</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold"></span>
-                          </td>
-                        </tr>
+                      <tbody id="body-modal2">
                       </tbody>
                     </table>
                   </div>
@@ -276,7 +207,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary btn-sm">Save</button>
+          <button class="btn btn-success btn-sm" id="save-ttf">Save</button>
         </div>
       </div>
     </div>
@@ -286,7 +217,7 @@
     <div class="modal-dialog modal-lg ">
       <div class="modal-content ">
         <div class="modal-header bg-light">
-          <h5 class="modal-title">Tambah Tanda Terima Faktur</h5>
+          <h5 class="modal-title">Tambah Faktur Pajak dan BPB</h5>
         </div>
         <div class="modal-body">
           <div class="container-fluid py-1">
@@ -296,94 +227,104 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="form-group">
+  
                         <h6 class="font-weight-bolder mb-2">Tipe Faktur Pajak</h6>
                         <div class="col-sm-5">
-                          <select id="selection" onchange="disableFP(this)" class="form-select" aria-label="Pilih Tipe FP">
-                            <option selected>Pilih Tipe FP</option>
-                            <option value="1">Standart</option>
+                          <select id="selection" onchange="disableFP(this)" class="form-select" required>
+                            <option value="1" selected>Standart</option>
                             <option value="2">Tanpa Faktur Pajak</option>
                           </select>
                         </div>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group" id="faktur_pj">
                         <h6 class="font-weight-bolder mb-2">Faktur Pajak</h6>
                         <div class="row mb-0">
-                          <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">No
-                            FP</label>
+                          <label class="col-sm-3 col-form-label col-form-label-sm text-primary">No FP</label>
                           <div class="col-sm-5">
-                            <input type="text" class="form-control form-control-sm" id="nofaktur"
+                            <input type="text" class="form-control form-control-sm" id="nofaktur" name="FP[]"
                               placeholder="Pilih No Faktur">
+                            <input type="hidden" id="nofaktur_file">
                           </div>
                           <div class="col-auto">
-                            <button type="submit" class="btn btn-secondary mb-3 btn-sm">Pilih No FP</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="pilihnofp"
+                              data-target="#modal5">Pilih No FP
                           </div>
                         </div>
-                        <div class="row mb-0">
-                          <label for="colFormLabelSm"
-                            class="col-sm-3 col-form-label col-form-label-sm text-primary">File FP</label>
-                          <div class="col-sm-5">
-                            <input type="file" class="form-control-file form-control-sm" id="filefaktur">
+  
+                        {{-- <form action="" method="" enctype="multipart/form-data"> --}}
+                          <div class="row mb-0">
+                            <label class="col-sm-3 col-form-label col-form-label-sm text-primary">File FP</label>
+                            <div class="col-sm-5">
+                              <input type="file" id="filefaktur" name="filefaktur"
+                                class="form-control-file form-control-sm">
+                            </div>
+                            <div class="col-auto">
+                              <button class="btnFP btn btn-secondary mb-3 btn-sm" id="check-nofaktur">Cek</button>
+                            </div>
                           </div>
-                          <div class="col-auto">
-                            <button type="submit" class="btn btn-secondary mb-3 btn-sm">Cek</button>
-                          </div>
-                        </div>
+                          {{--
+                        </form> --}}
+  
                         <div class="row mb-2">
-                          <label for="colFormLabelSm"
-                            class="col-sm-3 col-form-label col-form-label-sm text-primary">Tanggal FP</label>
+                          <label class="col-sm-3 col-form-label col-form-label-sm text-primary">Tanggal FP</label>
                           <div class="col-sm-5">
-                            <input type="date" class="form-control form-control-sm" id="tanggalfaktur"
-                              placeholder="date">
+                            <input type="date" class="form-control form-control-sm" name="FP[]" id="tanggalfaktur">
                           </div>
                         </div>
-
+  
                         <!--  Summary -->
-
+  
                         <div class="form-group">
                           <h6 class="font-weight-bolder mb-2 mt-3">Summary</h6>
                           <div class="row ">
                             <label class="col-sm-2 col-form-label col-form-label-sm text-primary">DPP FP</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="sum_TTF form-control form-control-sm" id= "DPP_FP">
-                            </div>
-                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Total DPP BPB</label>
-                            <div class="col-sm-3 mb-1">
-                              <input type="text" class="sum_TTF_BPB form-control form-control-sm" id= "Total_DPP_BPB">
-                            </div>
-                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary ">Selisih DPP</label>
-                            <div class="col-sm-3 mb-1">
-                              <input type="text" class="sum_TTF form-control form-control-sm"  id= "Selisih_DPP">
+                              <input type="text" class="sum_TTF form-control form-control-sm" id="DPP_FP" name="FP[]"
+                                readonly>
                             </div>
                             <label class="col-sm-2 col-form-label col-form-label-sm text-primary">PPN FP</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="sum_TTF form-control form-control-sm" id= "PPN_FP">
+                              <input type="text" class="sum_TTF form-control form-control-sm" id="PPN_FP" name="FP[]"
+                                readonly>
+                            </div>
+                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Total DPP BPB</label>
+                            <div class="col-sm-3 mb-1">
+                              <input type="text" class="sum_TTF_BPB form-control form-control-sm" id="Total_DPP_BPB"
+                                name="FP[]" readonly>
                             </div>
                             <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Total PPN BPB</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="sum_TTF_BPB form-control form-control-sm" id= "Total_PPN_BPB">
+                              <input type="text" class="sum_TTF_BPB form-control form-control-sm" id="Total_PPN_BPB"
+                                name="FP[]" readonly>
+                            </div>
+                            <label class="col-sm-2 col-form-label col-form-label-sm text-primary ">Selisih DPP</label>
+                            <div class="col-sm-3 mb-1">
+                              <input type="text" class="sum_TTF form-control form-control-sm" id="Selisih_DPP" name="FP[]"
+                                readonly>
                             </div>
                             <label class="col-sm-2 col-form-label col-form-label-sm text-primary">Selisih PPN</label>
                             <div class="col-sm-3 mb-1">
-                              <input type="text" class="sum_TTF form-control form-control-sm" id= "Selisih_PPN">
+                              <input type="text" class="sum_TTF form-control form-control-sm" id="Selisih_PPN" name="FP[]"
+                                readonly>
                             </div>
                           </div>
                         </div>
-
+  
                         <!--  End Summary -->
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
+  
               <!-- Tabel BPB -->
               <div class="col-md-12 mt-2">
                 <div class="card">
                   <div class="card-header">
                     <div class="d-flex align-items-center">
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal4">Add
+                      <button type="button" class="btn btn-primary btn-sm" id="btnmodal4" data-toggle="modal"
+                        data-target="#modal4">Add
                         BPB</button>
-                      {{-- <button class="btn btn-danger btn-sm ms-1">Remove</button> --}}
                     </div>
                   </div>
                   <div class="card-body px-0 pt-0 pb-2">
@@ -391,19 +332,14 @@
                       <table class="table align-items-center mb-0">
                         <thead>
                           <tr>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nomor BPB
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">BPB Date
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">DPP BPB
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">PPN BPB
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Action
-                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nomor BPB</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">BPB Date</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">DPP BPB</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">PPN BPB</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Action</th>
                           </tr>
                         </thead>
-                        <tbody id="selectedBPB">
+                        <tbody id="pilihBPB">
                         </tbody>
                       </table>
                     </div>
@@ -411,18 +347,18 @@
                 </div>
               </div>
             </div>
-
+  
             <!--  End Tabel BPB -->
             <div class="modal-footer ">
-              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary btn-sm">Save</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="close-fp" data-dismiss="modal">Close</button>
+              <button type="button" name="button" class="btn btn-primary btn-sm" id="save-fp">Save</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  
   <div id="modal4" class="modal fade" data-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content ">
@@ -439,14 +375,10 @@
                       <thead>
                         <tr>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">No</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nomor BPB
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Due Date BPB
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">FLAG PPN
-                          </th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">DPP BPB
-                          </th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nomor BPB</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Due Date BPB</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">FLAG PPN</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">DPP BPB</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">PPN BPB</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Add BPB</th>
                         </tr>
@@ -459,11 +391,48 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer ">
-            {{-- <button type="button" class="btn btn-primary btn-sm" id="addBPB">Tambah BPB</button> --}}
-            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-
+        </div>
+        <div class="modal-footer ">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="modal5" class="modal fade" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content ">
+        <div class="modal-header bg-light">
+          <h5 class="modal-title">Pilih No Faktur Pajak</h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="card mb-0">
+                <div class="card-body px-0 pt-0 pb-0">
+                  <div class="table-responsive p-0">
+                    <table class="table table-bordered -mb-1">
+                      <thead>
+                        <tr>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">No</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nomor Faktur Pajak</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Nama Penjual</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Jumlah DPP</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Jumlah PPN</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="body-modal5">
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="modal-footer ">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -472,13 +441,83 @@
   <script>
     var appUrl = "{{env('http://ttf.test')}}";
     var selectedBranchCode = null;
-
-    var optionsBPB = []; // array of BPB from api
-    var selectedBPB = []; // array of selected BPB
+    var optionsBPB = [];
+    var optionsNoFP = [];
+    var selectedFP = [];
+    var selectedBPB = [];
     var sumBPB_DPP = 0;
     var sumBPB_PPN = 0;
+    var jumFP_DPP = 0;
+    var jumFP_PPN = 0;
+    var selisihDPP = 0;
+    var selisihPPN = 0;
+    var ttf_sumBPB_DPP = 0;
+    var ttf_sumBPB_PPN = 0;
+    var ttf_jumFP_DPP = 0;
+    var ttf_jumFP_PPN = 0;
+    var ttf_selisihDPP = 0;
+    var ttf_selisihPPN = 0;
+    var selectedSupp = [];
 
-    $('#modal2').on('shown.bs.modal', function (e) {
+    // --------
+    var listOfFakturPajak = [];
+    var tmpListOfBPB =[];
+    var tmpListOfFakturPajak = [];
+
+
+
+  const formFileInput = document.getElementById('filefaktur');
+  const checkNoFaktur = document.getElementById('check-nofaktur');
+
+  checkNoFaktur.addEventListener ('click', (e) => {
+    let selectedFile = formFileInput.files[0];
+    if (selectedFile) {
+        sendFile(selectedFile);
+    } else {
+      alert('Pilih file terlebih dahulu');
+    }
+  })
+
+  function sendFile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    fetch(`${appUrl}/read_qr`, {
+      method: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      },
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        console.error('File upload failed');
+      }
+    })
+    .then(data => {
+      let noFakturHiddenInput = document.getElementById("nofaktur_file");
+      noFakturHiddenInput.value = data.no_faktur;
+
+      let noFaktur = document.getElementById("nofaktur").value;
+      let noFakturHidden = document.getElementById("nofaktur_file").value;
+      let btn = document.getElementById("btnmodal4");
+
+      if (noFaktur == noFakturHidden) {
+        btn.disabled = false;
+        alert(`nomor faktur sama!`)
+      } else {
+        btn.disabled = true;
+        alert(`nomor faktur berbeda!`)
+      }
+    })
+
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+  $('#modal2').on('shown.bs.modal', function (e) {
       const branchCode = $(e.relatedTarget).data('branch-code');
       selectedBranchCode = branchCode;
     //   alert(`modal 2 opened with id ${id}`)
@@ -493,165 +532,503 @@
           $('#x3').text(data.SUPP_TYPE)
           $('#x4').text(data.SUPP_PKP_NUM)
           $('#x5').text(`${data.SUPP_ADDR_LINE1 ?? ''} ${data.SUPP_ADDR_LINE2 ?? ''}`)
+
+          let namaSup = data.SUPP_SITE_ALT_NAME;
+          let cabangSup = data.SUPP_ADDR_PROVINCE;
+          let supsitecode = data.SUPP_SITE_CODE;
+          let supplierdata = {
+            namaSup : namaSup,
+            cabangSup : cabangSup,
+            supsitecode : supsitecode,
+
+          }
+          selectedSupp.push(supplierdata)
         }).
         catch(error => alert(error))
     })
 
-    $('#modal2').on('hidden.bs.modal', function (e) {
-        $('#x1').text('')
-        $('#x2').text('')
-        $('#x3').text('')
-        $('#x4').text('')
-        $('#x5').text('')
-    })
+  $('#modal3').on('shown.bs.modal', function (e) {
+    $('#body-modal2').empty();
+    document.getElementById("btnmodal4").disabled = true;
+    const branchCode = $(e.relatedTarget).data('branch-code');
+    fetch(`${appUrl}/get-sys-supp-site?` + new URLSearchParams({
+      supp_branch_code: selectedBranchCode
+      })
+    )
+      .then(response => response.json()).
+      catch(error => alert(error))
+  })
 
-    $('#modal4').on('shown.bs.modal', function (e) {
-      const branchCode = selectedBranchCode;
-        fetch(`${appUrl}/get-ttf-data-bpb?` + new URLSearchParams({
-            supp_branch_code: branchCode
-        }))
-        .then(response => response.json())
-        .then(data => {
-          data.forEach((el,index) => {
-            indexBPB = selectedBPB.find(ele => ele.BPB_NUMBER === el.BPB_NUMBER);
-            let number = index + 1;
-            let row, cb;
-            row =`
-            <tr>
-              <td class="align-middle text-center">
-                <span class="text-secondary text-xs font-weight-bold">${number}</span>
-              </td>
-              <td class="align-middle text-center">
-                <span class="text-secondary text-xs font-weight-bold">${el.BPB_NUMBER}</span>
-              </td>
-              <td class="align-middle text-center">
-                <span class="text-secondary text-xs font-weight-bold">${el.BPB_DATE}</span>
-              </td>
-              <td class="align-middle text-center">
-                <span class="text-secondary text-xs font-weight-bold">${el.FLAG_PPN}</span>
-              </td>
-              <td class="align-middle text-center">
-                <span class="text-secondary text-xs font-weight-bold">${el.BPB_DPP}</span>
-              </td>
-              <td class="align-middle text-center">
-                <span class="text-secondary text-xs font-weight-bold">${el.BPB_TAX}</span>
-              </td>
-              
-            `;
-            if(indexBPB) {
-              cb =  `<td class="align-middle text-center">
-                <div class="form-check" id="input_cb">
-                  <input class='form-check-input checklist-bpb' type='checkbox' id='${el.BPB_NUMBER}' name='cb_bpb' checked>
-                </div>
-              </td>
-            </tr> `;
-            }else{
-              cb =  `<td class="align-middle text-center">
-                <div class="form-check" id="input_cb">
-                  <input class='form-check-input checklist-bpb' type='checkbox' id='${el.BPB_NUMBER}' name='cb_bpb'>
-                </div>
-              </td>
-            </tr> `;
-            }
-            row +=cb;
-            $('#body-modal4').append(row);
-            
-          })
+  $('#modal3').on('hidden.bs.modal', function (e) {
+    document.getElementById("selection").value = '1';
+    document.getElementById("nofaktur").value = '';
+    document.getElementById("nofaktur_file").value = '';
+    document.getElementById("tanggalfaktur").value = '';
+    document.getElementById("DPP_FP").value = '';
+    document.getElementById("PPN_FP").value = '';
+    document.getElementById("Total_DPP_BPB").value = '';
+    document.getElementById("Total_PPN_BPB").value = '';
+    document.getElementById("Selisih_DPP").value = '';
+    document.getElementById("Selisih_PPN").value = '';
+    $('#pilihBPB').empty();
 
-          optionsBPB = data;
-        }).
-        catch(error => alert(error))
+    tmpListOfFakturPajak.forEach(el => {
+      let row = `
+      <tr>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold "> ${el.typefp}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.noFaktur}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.tglFaktur}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.DPP_Faktur}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.PPN_Faktur}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.buddleBPB}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.Selisih_DPP}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.Selisih_PPN}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.listOfBPB[0].FLAG_PPN}</span>
+        </td>
+      </tr>
+        `
+      $('#body-modal2').append(row);
     })
+  })
+
+  $('#save-fp').on('click', function (e) {
+    let type = document.getElementById("selection");
+    let typeselect = type.options[type.selectedIndex];
+    let typefp = typeselect.textContent;
+    let noFaktur = document.getElementById("nofaktur").value;
+    let noFakturHidden = document.getElementById("nofaktur_file").value;
+    let tglFaktur = document.getElementById("tanggalfaktur").value;
+
+    let DPP_Faktur = document.getElementById("DPP_FP").value;
+    let PPN_Faktur = document.getElementById("PPN_FP").value;
+    let Total_DPP_BPB = document.getElementById("Total_DPP_BPB").value;
+    let Total_PPN_BPB = document.getElementById("Total_PPN_BPB").value;
+    let Selisih_DPP = document.getElementById("Selisih_DPP").value;
+    let Selisih_PPN = document.getElementById("Selisih_PPN").value;
+    let buddleBPB = selectedBPB.length;
+    let obj = {
+        typefp:typefp,
+        noFaktur: noFaktur,
+        tglFaktur: tglFaktur,
+        DPP_Faktur: DPP_Faktur,
+        PPN_Faktur: PPN_Faktur,
+        Total_DPP_BPB: Total_DPP_BPB,
+        Total_PPN_BPB: Total_PPN_BPB,
+        Selisih_DPP: Selisih_DPP,
+        Selisih_PPN: Selisih_PPN,
+        buddleBPB : buddleBPB,
+        listOfBPB: selectedBPB
+    }
+    
+    tmpListOfBPB.push(selectedBPB);
+    tmpListOfFakturPajak.push(obj);
+    console.log('tmpListOfFakturPajak', tmpListOfFakturPajak);
+    obj = null;
+    selectedBPB = [];
+    ttf_sumBPB_DPP= ttf_sumBPB_DPP + sumBPB_DPP;
+    ttf_sumBPB_PPN = ttf_sumBPB_PPN + sumBPB_PPN;
+    ttf_jumFP_DPP = ttf_jumFP_DPP + jumFP_DPP;
+    ttf_jumFP_PPN = ttf_jumFP_PPN + jumFP_PPN;
+    ttf_selisihDPP = ttf_jumFP_DPP-ttf_sumBPB_DPP;
+    ttf_selisihPPN = ttf_jumFP_PPN-ttf_sumBPB_PPN;
+    sumBPB_DPP = 0;
+    sumBPB_PPN = 0;
+    jumFP_DPP = 0;
+    jumFP_PPN = 0;
+    selisihDPP = 0;
+    selisihPPN = 0;
+    console.log('ttf_sumBPB_DPP', ttf_sumBPB_DPP);
+    console.log('ttf_sumBPB_PPN', ttf_sumBPB_PPN);
+    console.log('ttf_jumFP_DPP', ttf_jumFP_DPP);
+    console.log('ttf_jumFP_PPN', ttf_jumFP_PPN);
+    console.log('ttf_selisihDPP', ttf_selisihDPP);
+    console.log('ttf_selisihPPN', ttf_selisihPPN);
+    $('#modal3').modal('hide');
+  })
+
+  // $('#save-ttf').on('click', function (e) {
+  //   let no_ttf = "2303998748243";
+  //   let status_ttf = "Draft";
+  //   let cabang_ttf = selectedSupp[0].cabangSup;
+  //   let tanggalttf = new Date();
+  //   let tanggal_ttf = tanggalttf.toLocaleDateString("en-US")
+  //   let tanggal_validasi = "-";
+  //   let nama_supplier = selectedSupp[0].namaSup;
+  //   let jml_fp = tmpListOfBPB.length;
+
+  //   let ttf = {
+  //       no_ttf:no_ttf,
+  //       status_ttf: status_ttf,
+  //       cabang_ttf: cabang_ttf,
+  //       tanggal_ttf: tanggal_ttf,
+  //       tanggal_validasi: tanggal_validasi,
+  //       nama_supplier: nama_supplier,
+  //       listFP: tmpListOfFakturPajak,
+  //       branchcode : selectedBranchCode,
+  //       jml_fp : jml_fp,
+  //       ttfjumFP_DPP = ttf_jumFP_DPP,
+  //       ttfsumBPB_DPP = ttf_sumBPB_DPP,
+  //       ttfsumBPB_PPN = ttf_sumBPB_PPN,
+  //       ttfjumFP_DPP = ttf_jumFP_DPP,
+  //       ttfjumFP_PPN = ttf_jumFP_PPN,
+  //       ttfselisihDPP = ttf_selisihDPP,
+  //       ttfselisihPPN = ttf_selisihPPN,
+  //   }
+  //   listOfFakturPajak.push(ttf);
+  //   console.log('listOfFakturPajak', listOfFakturPajak);
+  //   $("#modal2").modal('hide');
+  //   $("#modal1").modal('hide');
+  // })
+
+  document.getElementById("save-ttf").addEventListener("click", function(){
+    let no_ttf = "0000";
+    let status_ttf = "Draft";
+    let cabang_ttf = selectedSupp[0].cabangSup;
+    let supsitecode = selectedSupp[0].supsitecode;
+    let typefp_ttf = tmpListOfFakturPajak[0].typefp;
+    let tanggalttf = new Date();
+    let tanggal_ttf = tanggalttf.toLocaleDateString("en-US")
+    let tanggal_validasi = "-";
+    let nama_supplier = selectedSupp[0].namaSup;
+    let jml_fp = tmpListOfBPB.length;
+
+    let ttf = {
+        no_ttf:no_ttf,
+        status_ttf: status_ttf,
+        cabang_ttf: cabang_ttf,
+        supsitecode : supsitecode,
+        tanggal_ttf: tanggal_ttf,
+        tanggal_validasi: tanggal_validasi,
+        typefp_ttf : typefp_ttf,
+        nama_supplier: nama_supplier,
+        listFP: tmpListOfFakturPajak,
+        branchcode : selectedBranchCode,
+        jml_fp : jml_fp,
+        ttfsumBPB_DPP : ttf_sumBPB_DPP,
+        ttfsumBPB_PPN : ttf_sumBPB_PPN,
+        ttfjumFP_DPP : ttf_jumFP_DPP,
+        ttfjumFP_PPN : ttf_jumFP_PPN,
+        ttfselisihDPP : ttf_selisihDPP,
+        ttfselisihPPN : ttf_selisihPPN,
+        
+    }
+    listOfFakturPajak.push(ttf);
+    fetch('/create-ttf', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      },
+      body: JSON.stringify(listOfFakturPajak)
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    $("#modal2").modal('hide');
+    $("#modal1").modal('hide');
+  })
+
+  $('#modal2').on('hidden.bs.modal', function (e) {
+    $('#body-modal2').empty();
+    // listOfFakturPajak.forEach((el,index) => {
+    //   let number = index + 1;
+    //   let row = `
+    //   <tr>
+    //     <td class="align-middle text-center">
+    //       <span class="text-secondary text-xs font-weight-bold">${number}</span>
+    //     </td>
+    //     <td class="align-middle text-center">
+    //       <span class="text-secondary text-xs font-weight-bold">${el.no_ttf}</span>
+    //     </td>
+    //     <td class="align-middle text-center text-sm">
+    //       <span class="badge badge-sm bg-gradient-success">${el.status_ttf}</span>
+    //     </td>
+    //     <td class="align-middle text-center">
+    //       <span class="text-secondary text-xs font-weight-bold">${el.cabang_ttf}</span>
+    //     </td>
+    //     <td class="align-middle text-center">
+    //       <span class="text-secondary text-xs font-weight-bold">${el.tanggal_ttf}</span>
+    //     </td>
+    //     <td class="align-middle text-center">
+    //       <span class="text-secondary text-xs font-weight-bold">${el.tanggal_validasi}</span>
+    //     </td>
+    //     <td class="align-middle text-center">
+    //       <span class="text-secondary text-xs font-weight-bold">${el.nama_supplier}</span>
+    //     </td>
+    //     <td class="align-middle text-center">
+    //       <a href="#" class="text-decoration-none text-xs font-weight-bold">Download</a>
+    //     </td>
+    //     <td class="align-middle text-center">
+    //       <a href="#" class="text-decoration-none text-xs font-weight-bold">Delete</a>
+    //     </td>
+    //   </tr>     
+    //     `
+    //   $('#savettf').append(row);
+    // })
+  })
+
+  $('#modal5').on('shown.bs.modal', function (e) {
+    fetch(`${appUrl}/get-ttf-data-nofp?` + new URLSearchParams({
+      supp_branch_code: selectedBranchCode
+      })
+    )
+      .then(response => response.json())
+      .then(data => {
+        console.log('data', data);
+        data.forEach((el,index) => {
+          let number = index + 1;
+          let row;
+          row =`
+          <tr>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${number}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${el.NOMOR_FAKTUR}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${el.NAMA_PENJUAL}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${rupiah(el.JUMLAH_DPP)}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${rupiah(el.JUMLAH_PPN)}</span>
+            </td>
+            <td class="align-middle text-center">
+                <button class="nofpPilih btn btn-primary btn-sm" id ="${el.NOMOR_FAKTUR}">Pilih</button>
+                </div>
+            </td>
+          </tr>
+          `;
+          $('#body-modal5').append(row);
+
+        })
+        optionsNoFP = data;
+      }).
+      catch(error => alert(error))
+  })
+
+  $(document).on('click', '.nofpPilih', function(e){
+    $("#modal5").modal('hide');
+    $('#body-modal5').empty();
+    const id_nofp = $(this).attr('id');
+    const selected = optionsNoFP.find(el => el.NOMOR_FAKTUR === id_nofp);
+    const isExist = selectedFP.find(el => el.NOMOR_FAKTUR === id_nofp);
+    if (!isExist) {
+      selectedFP.splice(0);
+      selectedFP.push(selected);
+      jumFP_DPP = selectedFP.map((el) => el.JUMLAH_DPP).reduce((sum, current)=> sum + current,0);
+      jumFP_PPN = selectedFP.map((el) => el.JUMLAH_PPN).reduce((sum, current)=> sum + current,0);
+    }
+
+    console.log('selectedFP', selectedFP)
+    console.log('jumFP_DPP', jumFP_DPP)
+    console.log('jumFP_PPN', jumFP_PPN)
+    document.getElementById("DPP_FP").value = rupiah(jumFP_DPP);
+    document.getElementById("PPN_FP").value = rupiah(jumFP_PPN);
+    document.getElementById("nofaktur").value = selectedFP.map((el) => el.NOMOR_FAKTUR);
+    document.getElementById("tanggalfaktur").value = selectedFP.map((el) => el.TANGGAL_FAKTUR);
+  })
+
+  $('#modal4').on('shown.bs.modal', function (e) {
+    const branchCode = selectedBranchCode;
+      fetch(`${appUrl}/get-ttf-data-bpb?` + new URLSearchParams({
+          supp_branch_code: branchCode
+      }))
+      .then(response => response.json())
+      .then(data => {
+        data.forEach((el,index) => {
+          indexBPB = selectedBPB.find(ele => ele.BPB_NUMBER === el.BPB_NUMBER);
+          let number = index + 1;
+          let row, cb;
+          row =`
+          <tr>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${number}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${el.BPB_NUMBER}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${el.BPB_DATE}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${el.FLAG_PPN}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${rupiah(el.BPB_DPP)}</span>
+            </td>
+            <td class="align-middle text-center">
+              <span class="text-secondary text-xs font-weight-bold">${rupiah(el.BPB_TAX)}</span>
+            </td>
+
+          `;
+          if(indexBPB) {
+            cb =  `<td class="align-middle text-center">
+              <div class="form-check" id="input_cb">
+                <input class='form-check-input checklist-bpb' type='checkbox' id='${el.BPB_NUMBER}' checked>
+              </div>
+            </td>
+          </tr> `;
+          }else{
+            cb =  `<td class="align-middle text-center">
+              <div class="form-check" id="input_cb">
+                <input class='form-check-input checklist-bpb' type='checkbox' id='${el.BPB_NUMBER}'>
+              </div>
+            </td>
+          </tr> `;
+          }
+          row +=cb;
+          $('#body-modal4').append(row);
+
+        })
+        optionsBPB = data;
+      }).
+      catch(error => alert(error))
+  })
 
   $(document).on('change', '.checklist-bpb', function(e) {
-        const isChecked = $(this).is(':checked');
-        const bpbNumber = $(this).attr('id');
-
-        if (isChecked) {
-            const selected = optionsBPB.find(el => el.BPB_NUMBER === bpbNumber);
-            // check if selectedBPB already has the selected BPB
-            const isExist = selectedBPB.find(el => el.BPB_NUMBER === bpbNumber);
-            if (!isExist) {      
-              
-                selectedBPB.push(selected);
-                sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> sum + current,0);
-                sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> sum + current,0);
-                }
-                           
-        } else {
-            const index = selectedBPB.findIndex(el => el.BPB_NUMBER === bpbNumber);
-            selectedBPB.splice(index, 1);
-            sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> current - sum,0);
-            sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> current - sum,0);
-            
-        }
-
-        console.log('selectedBPB', selectedBPB)
-        console.log('sumBPB_DPP', sumBPB_DPP)
-        console.log('sumBPB_PPN', sumBPB_PPN)
-        document.getElementById("Total_DPP_BPB").value = sumBPB_DPP;
-        document.getElementById("Total_PPN_BPB").value = sumBPB_PPN;
-    })
-
-
-    $('#modal4').on('hidden.bs.modal', function (e) {
-        $('#body-modal4').empty();
-        $('#selectedBPB').empty();
-
-        selectedBPB.forEach(el => {
-            let row = `
-              <tr id="row">
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">${el.BPB_NUMBER}</span>
-                </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">${el.BPB_DATE}</span>
-                </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">${el.BPB_DPP}</span>
-                </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">${el.BPB_TAX}</span>
-                </td>
-                <td class="align-middle text-center">
-                  <button class="bpbDelete btn btn-danger btn-sm" id ="${el.BPB_NUMBER}">Delete</button>
-                </td>
-                
-              </tr>
-              `
-            $('#selectedBPB').append(row);
-            document.getElementById("Total_DPP_BPB").value = sumBPB_DPP;
-            document.getElementById("Total_PPN_BPB").value = sumBPB_PPN;
-        })
-    })
-
-    $("#selectedBPB").on('click', '.bpbDelete', function(){
-      $(this).closest('tr').remove();  
+      const isChecked = $(this).is(':checked');
       const bpbNumber = $(this).attr('id');
+
+      if (isChecked) {
+          const selected = optionsBPB.find(el => el.BPB_NUMBER === bpbNumber);
+          // check if selectedBPB already has the selected BPB
+          const isExist = selectedBPB.find(el => el.BPB_NUMBER === bpbNumber);
+          if (!isExist) {
+              selectedBPB.push(selected);
+              sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> sum + current,0);
+              sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> sum + current,0);
+              }
+
+      } else {
+          const index = selectedBPB.findIndex(el => el.BPB_NUMBER === bpbNumber);
+          selectedBPB.splice(index, 1);
+          sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> current - sum,0);
+          sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> current - sum,0);
+      }
+      if(jumFP_DPP==0){
+            selisihDPP = sumBPB_DPP;
+            selisihPPN = sumBPB_PPN;
+          } else{
+            selisihDPP = jumFP_DPP - sumBPB_DPP;
+            selisihPPN = jumFP_PPN - sumBPB_PPN;
+          }
+
+      console.log('selectedBPB', selectedBPB)
+      console.log('sumBPB_DPP', sumBPB_DPP)
+      console.log('sumBPB_PPN', sumBPB_PPN)
+      document.getElementById("Total_DPP_BPB").value = rupiah(sumBPB_DPP);
+      document.getElementById("Total_PPN_BPB").value = rupiah(sumBPB_PPN);
+      document.getElementById("Selisih_DPP").value = rupiah(selisihDPP);
+      document.getElementById("Selisih_PPN").value = rupiah(selisihPPN);
+
+  })
+
+  $("#pilihBPB").on('click', '.bpbDelete', function(){
+    $(this).closest('tr').remove();
+    const bpbNumber = $(this).attr('id');
     const index = selectedBPB.findIndex(el => el.BPB_NUMBER === bpbNumber);
     selectedBPB.splice(index, 1);
     sumBPB_DPP = selectedBPB.map((el) => el.BPB_DPP).reduce((sum, current)=> sum + current,0);
     sumBPB_PPN = selectedBPB.map((el) => el.BPB_TAX).reduce((sum, current)=> sum + current,0);
+    if(jumFP_DPP==0){
+            selisihDPP = sumBPB_DPP;
+            selisihPPN = sumBPB_PPN;
+          } else{
+            selisihDPP = jumFP_DPP - sumBPB_DPP;
+            selisihPPN = jumFP_PPN - sumBPB_PPN;
+          }
 
     console.log('selectedBPB', selectedBPB)
     console.log('sumBPB_DPP', sumBPB_DPP)
     console.log('sumBPB_PPN', sumBPB_PPN)
-    document.getElementById("Total_DPP_BPB").value = sumBPB_DPP;
-    document.getElementById("Total_PPN_BPB").value = sumBPB_PPN;
+    document.getElementById("Total_DPP_BPB").value = rupiah(sumBPB_DPP);
+    document.getElementById("Total_PPN_BPB").value = rupiah(sumBPB_PPN);
+    document.getElementById("Selisih_DPP").value = rupiah(selisihDPP);
+    document.getElementById("Selisih_PPN").value = rupiah(selisihPPN);
+  })
 
+  $('#modal4').on('hidden.bs.modal', function (e) {
+    $('#body-modal4').empty();
+    selectedBPB.forEach(el => {
+      let row = `
+        <tr id="row">
+          <td class="align-middle text-center">
+            <span class="text-secondary text-xs font-weight-bold">${el.BPB_NUMBER}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-secondary text-xs font-weight-bold">${el.BPB_DATE}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-secondary text-xs font-weight-bold">${rupiah(el.BPB_DPP)}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-secondary text-xs font-weight-bold">${rupiah(el.BPB_TAX)}</span>
+          </td>
+          <td class="align-middle text-center">
+            <button class="bpbDelete btn btn-danger btn-sm" id ="${el.BPB_NUMBER}">Delete</button>
+          </td>
+        </tr>
+        `
+      $('#pilihBPB').append(row);
     })
+  })
 
-    function disableFP(faktur) {
+  function disableFP(faktur) {
     console.log(faktur.value)
     if(faktur.value == 1){
       document.getElementById("nofaktur").disabled = false;
       document.getElementById("filefaktur").disabled = false;
       document.getElementById("tanggalfaktur").disabled = false;
+      document.getElementById("btnmodal4").disabled = true;
+      document.getElementById("pilihnofp").disabled = false;
+      document.getElementById("check-nofaktur").disabled = false;
     }else {
       document.getElementById("nofaktur").disabled = true;
       document.getElementById("filefaktur").disabled = true;
       document.getElementById("tanggalfaktur").disabled = true;
+      document.getElementById("btnmodal4").disabled = false;
+      document.getElementById("pilihnofp").disabled = true;
+      document.getElementById("check-nofaktur").disabled = true;
+      
     }
+  };
+
+  const rupiah = (number)=>{
+    return new Intl.NumberFormat({
+      style: "currency"
+    }).format(number);
   }
+
+  // document.getElementById("console-log").addEventListener("click", function(){
+  //   console.log('=============================')
+  //   console.log('selectedBPB', selectedBPB)
+  //   console.log('tmpListOfFakturPajak', tmpListOfFakturPajak)
+  // })
+
+
   </script>
   @endsection

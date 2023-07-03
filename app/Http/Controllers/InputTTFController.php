@@ -7,6 +7,8 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
+use Smalot\PdfParser\Parser;
 
 class InputTTFController extends Controller
 {
@@ -83,4 +85,105 @@ class InputTTFController extends Controller
 
         return response()->json($data);
     }
+
+    public function getTtfDataNoFP(Request $request)
+    {
+        $suppBranchCode = $request->supp_branch_code;
+        $ambil = auth()->user()->id;
+        $fp = DB::table('sys_supp_site')
+        ->join('sys_mapp_supp','sys_supp_site.SUPP_BRANCH_CODE','=','sys_mapp_supp.BRANCH_CODE')
+        ->join('users','users.id','=','sys_mapp_supp.USER_ID')
+        ->join('sys_supplier','sys_supplier.SUPP_ID','=','users.SUPP_ID')
+        ->where ('sys_mapp_supp.USER_ID','=',$ambil)
+        ->where('sys_supp_site.SUPP_BRANCH_CODE', $suppBranchCode)
+        ->select('sys_supp_site.SUPP_PKP_NUM')
+        ->groupBy('sys_supp_site.SUPP_PKP_NUM');
+
+        $data = DB::table('no_faktur')
+        ->whereIn('no_faktur.NPWP_PENJUAL',$fp)
+        ->get();
+
+        return response()->json($data);
+    }
+    public function read_qr(Request $request)
+    {
+        $file = $request->file;
+        $pdfParser = new Parser();
+        $pdf = $pdfParser->parseFile($file->path());
+        $content = $pdf->getText();
+        $explode = explode("\n",$content);
+        $cari = preg_grep("/^Kode dan Nomor Seri Faktur Pajak :/i", $explode);
+        $cari = array_values($cari);
+        $noFaktur = preg_replace("/[^0-9\.\-]/","",$cari);
+        return response()->json([
+            'no_faktur' => $noFaktur
+        ]);
+    }
+
+    public function createTtf(Request $request)
+    {
+        $ambil = auth()->user()->id;
+        $data = $request->all();
+        foreach ($data as $d) {
+            $header = DB::table('ttf_headers')->insertGetId([
+                // 'TTF_ID' => '',
+                'BRANCH_CODE' => $d['branchcode'],
+                'VENDOR_SITE_CODE' => $d['supsitecode'],
+                'TTF_NUM' => '',
+                'TTF_DATE'=> $d['tanggal_ttf'],
+                'TTF_TYPE' => $d['typefp'],
+                'TTF_STATUS'=> 'DRAFT',
+                'TTF_RETURN_DATE'=> '',
+                'TTF_GIRO_DATE'=> '',
+                'ORG_ID'=> '',
+                'SOURCE' => '',
+                'REVIEWED_BY'=> $ambil,
+                'REVIEWED_DATE'=> $d['tanggal_ttf'],
+                'CREATED_BY'=> $ambil,
+                'CREATED_DATE'=> $d['tanggal_ttf'],
+                'LAST_UPDATE_DATE'=> $d['tanggal_ttf'],
+                'LAST_UPDATE_BY' => $d['tanggal_ttf'],
+                'MEMO_NUM' => '',
+                'JUMLAH_FP' => $d['jml_fp'],
+                'SUM_DPP_FP' => $d['ttfjumFP_DPP'],
+                'SUM_TAX_FP' => $d['ttfjumFP_PPN'],
+                'JUMLAH_BPB' => '',
+                'SUM_DPP_BPB' => $d['ttfsumBPB_DPP'],
+                'SUM_TAX_BPB' => $d['ttfsumBPB_PPN'],
+                'SELISIH_DPP' => $d['ttfselisihDPP'],
+                'SELISIH_TAX' => $d['ttfselisihPPN'],
+            ]);
+            $ttf_fp = DB::table('ttf_fp')->insert([
+            'TTF_FP_ID'=> '',
+            'TTF_ID'=> $header,
+            'FP_NUM'=> '',
+            'FP_TYPE'=> $d['listFP[0].typefp'],
+            'FP_DATE'=> $d['tanggal_ttf'],
+            'FP_DPP_AMT'=> $d[''],
+            'FP_TAX_AMT'=> $d[''],
+            'USED_FLAG'=> 'Y',
+            'CREATED_BY'=> $ambil,
+           'CREATION_DATE'=> $d['tanggal_ttf'],
+            'LAST_UPDATE_BY'=> '',
+           'LAST_UPDATE_DATE'=> '',
+            'TTF_HEADERS_TTF_ID'=> $d[''],
+            ]);
+       
+            DB::table('ttf_lines')->insert([
+                // 'TTF_LINE_ID'=> '',
+                'TTF_ID'=> $header,
+                'TTF_BPB_ID'=> $d[''],
+                'TTF_FP_ID'=> $ttf_fp,
+                'ACTIVE_FLAG'=> 'Y',
+                'CREATION_DATE'=> $d['tanggal_ttf'],
+                'CREATED_BY'=> $ambil,
+                'LAST_UPDATE_DATE'=> $d['tanggal_ttf'],
+                'LAST_UPDATE_BY'=> $d['tanggal_ttf'],
+                'TTF_HEADERS_TTF_ID'=> $d[''],
+                'TTF_FP_TTF_FP_ID'=> $d[''],
+            ]);
+        }
+        return response()->json(['message' => 'Data Telah di Simpan']);
+    }
+
 }

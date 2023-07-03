@@ -24,12 +24,16 @@ Route::group(['middleware' => ['supplier']], function () {
     Route::get('/home', [HomeController::class, 'index']);
     Route::get('/home/jk', [HomeController::class, 'downloadJK']);
     Route::get('/inputttf', [InputTTFController::class, 'inputttf']);
-    Route::get('/inputttf/pilihcabang/{id2}', [InputTTFController::class, 'pilihCabang'])->name('inputttf.pilihCabang');
-    // Route::post('/inputttf', [InputTTFController::class, 'simpan_bpb2']);
+    Route::get('/addttf/{id1}', [InputTTFController::class, 'addttf']);
+    Route::get('/tambahfp/{id1}', [InputTTFController::class, 'tambahfp']);
     Route::get('/download', [DownloadController::class, 'download']);
 
-    Route::get('/get-sys-supp-site', [InputTTFController::class, 'getSysSuppSite']);
     Route::get('/get-ttf-data-bpb', [InputTTFController::class, 'getTtfDataBpb']);
+    Route::get('/get-sys-supp-site', [InputTTFController::class, 'getSysSuppSite']);
+    Route::get('/get-ttf-data-nofp', [InputTTFController::class, 'getTtfDataNoFP']);
+    Route::post('/read_qr', [InputTTFController::class, 'read_qr'])->name('read_qr');
+    Route::post('/create-ttf', [InputTTFController::class, 'createTtf']);
+
 });
 
 /*admin*/
@@ -39,6 +43,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/aturlimit', [AturLimitController::class, 'aturlimit']);
     Route::get('/aturuser', [AturUserController::class, 'aturuser']);
     Route::get('/aturuser/adduser', [AturUserController::class, 'adduser']);
+    Route::get('/get-Sys-Supp', [AturUserController::class, 'getSysSupp']);
     Route::get('/datattf', [DataTTFController::class, 'datattf']);
     Route::get('/datasup', [DataTTFController::class, 'datasup']);
     Route::get('/datalampfp', [DataTTFController::class, 'datalampfp']);
@@ -49,3 +54,4 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('/aturpemberitahuan/save_pemberitahuan', [AturPemberitahuanController::class, 'save_pemberitahuan']);
     Route::get('/downloadadmin', [DownloadController::class, 'downloadadmin']);
 });
+
