@@ -44,25 +44,16 @@ class InputTTFController extends Controller
         ->where ('sys_mapp_supp.USER_ID','=',$ambil)
         ->get();
 
-        //pilih bpb
-        $bpb = DB::table('ttf_data_bpb')
-        ->join('sys_mapp_supp','ttf_data_bpb.BRANCH_CODE','=','sys_mapp_supp.BRANCH_CODE')
-        ->where ('sys_mapp_supp.USER_ID','=',$ambil)
-        ->where ('ttf_data_bpb.USED_FLAG','=','N')
+        $ttf = DB::table('ttf_headers')
+        ->join('sys_supp_site','sys_supp_site.SUPP_BRANCH_CODE','=','ttf_headers.BRANCH_CODE')
+        ->where ('ttf_headers.CREATED_BY','=',$ambil)
         ->get();
 
-        //pilih bpb tmp
-        $bpb2 = DB::table('ttf_data_bpb')
-        ->join('sys_mapp_supp','ttf_data_bpb.BRANCH_CODE','=','sys_mapp_supp.BRANCH_CODE')
-        ->where ('sys_mapp_supp.USER_ID','=',$ambil)
-        ->where ('ttf_data_bpb.USED_FLAG','=','Y')
-        ->get();
 
         return view('inputttf', [
             "title" => "inputttf",
             'cbg' => $cbg,
-            'bpb' => $bpb,
-            'bpb2' => $bpb2
+            'ttf' => $ttf,
         ]);
     }
 
@@ -132,12 +123,13 @@ class InputTTFController extends Controller
         DB::beginTransaction();
         try{
             foreach ($data as $d) {
-                $ttf_num = mt_rand(100000000000,999999999999);
+                
+                $ttf_num = mt_rand(1000000,9999999);
                 $header = DB::table('ttf_headers')->insertGetId([
                     // 'TTF_ID' => '',
                     'BRANCH_CODE' => $d['branchcode'],
                     'VENDOR_SITE_CODE' => $d['supsitecode'],
-                    'TTF_NUM' => $ttf_num,
+                    'TTF_NUM' => "23039".$ttf_num,
                     'TTF_DATE'=> now()->format('Y-m-d'),
                     'TTF_TYPE' => $d['typefp_ttf'],
                     'TTF_STATUS'=> 'DRAFT',
@@ -151,7 +143,7 @@ class InputTTFController extends Controller
                     'CREATED_DATE'=> now()->format('Y-m-d'),
                     'LAST_UPDATE_DATE'=> now()->format('Y-m-d'),
                     'LAST_UPDATE_BY' => $ambil,
-                    'MEMO_NUM' => $ttf_num,
+                    'MEMO_NUM' =>  "23039".$ttf_num,
                     'JUMLAH_FP' => $d['jml_fp'],
                     'SUM_DPP_FP' => $d['ttfjumFP_DPP'],
                     'SUM_TAX_FP' => $d['ttfjumFP_PPN'],

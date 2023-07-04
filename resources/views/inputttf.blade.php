@@ -22,8 +22,8 @@
                 TTF</button>
               <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#">Submit
                 TTF</button>
-              <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#">Delete
-                TTF</button>
+              {{-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#">Delete
+                TTF</button> --}}
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -51,7 +51,46 @@
                     </tr>
                   </thead>
                   <tbody id="savettf">
-                   
+                    @foreach($ttf as $t)
+                    <tr>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ $loop->iteration }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ $t->TTF_NUM }}</span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        @if($t->TTF_STATUS == "DRAFT")
+                        <span class="badge badge-sm bg-gradient-secondary">DRAFT</span>
+                        @else
+                        <span class="badge badge-sm bg-gradient-success">SUBMITTED</span>
+                        @endif
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ $t->SUPP_ADDR_PROVINCE }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($t->TTF_DATE)) }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($t->TTF_RETURN_DATE)) }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ $t->SUPP_SITE_ALT_NAME }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <a href="#" class="text-decoration-none text-xs font-weight-bold">Download</a>
+                      </td>
+                      <td class="align-middle text-center">
+                        @if($t->TTF_STATUS == "DRAFT")
+                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                        @else
+                        <a href="#" class="btn btn-danger btn-xs disabled">Delete</a>
+                        @endif
+                        
+                      </td>
+                    </tr>     
+                    @endforeach
                   </tbody>
                 </table>
                 <nav aria-label="...">
@@ -119,7 +158,7 @@
                   <td class="align-middle text-center">
 
                     <a data-branch-code="{{ $c->BRANCH_CODE }}" data-toggle="modal" title="Add this item"
-                      class="openModal btn btn-primary btn-sm" href="#modal2">Pilih</a>
+                      class="openModal btn btn-primary btn-xs" href="#modal2">Pilih</a>
                   </td>
                 </tr>
               </tbody>
@@ -663,43 +702,7 @@
     $('#modal3').modal('hide');
   })
 
-  // $('#save-ttf').on('click', function (e) {
-  //   let no_ttf = "2303998748243";
-  //   let status_ttf = "Draft";
-  //   let cabang_ttf = selectedSupp[0].cabangSup;
-  //   let tanggalttf = new Date();
-  //   let tanggal_ttf = tanggalttf.toLocaleDateString("en-US")
-  //   let tanggal_validasi = "-";
-  //   let nama_supplier = selectedSupp[0].namaSup;
-  //   let jml_fp = tmpListOfBPB.length;
-
-  //   let ttf = {
-  //       no_ttf:no_ttf,
-  //       status_ttf: status_ttf,
-  //       cabang_ttf: cabang_ttf,
-  //       tanggal_ttf: tanggal_ttf,
-  //       tanggal_validasi: tanggal_validasi,
-  //       nama_supplier: nama_supplier,
-  //       listFP: tmpListOfFakturPajak,
-  //       branchcode : selectedBranchCode,
-  //       jml_fp : jml_fp,
-  //       ttfjumFP_DPP = ttf_jumFP_DPP,
-  //       ttfsumBPB_DPP = ttf_sumBPB_DPP,
-  //       ttfsumBPB_PPN = ttf_sumBPB_PPN,
-  //       ttfjumFP_DPP = ttf_jumFP_DPP,
-  //       ttfjumFP_PPN = ttf_jumFP_PPN,
-  //       ttfselisihDPP = ttf_selisihDPP,
-  //       ttfselisihPPN = ttf_selisihPPN,
-  //   }
-  //   listOfFakturPajak.push(ttf);
-  //   console.log('listOfFakturPajak', listOfFakturPajak);
-  //   $("#modal2").modal('hide');
-  //   $("#modal1").modal('hide');
-  // })
-
   document.getElementById("save-ttf").addEventListener("click", function(){
-    let no_ttf = "0000";
-    let status_ttf = "Draft";
     let cabang_ttf = selectedSupp[0].cabangSup;
     let supsitecode = selectedSupp[0].supsitecode;
     let typefp_ttf = tmpListOfFakturPajak[0].typefp;
@@ -710,8 +713,6 @@
     let jml_fp = tmpListOfBPB.length;
 
     let ttf = {
-        no_ttf:no_ttf,
-        status_ttf: status_ttf,
         cabang_ttf: cabang_ttf,
         supsitecode : supsitecode,
         tanggal_ttf: tanggal_ttf,
@@ -751,41 +752,41 @@
 
   $('#modal2').on('hidden.bs.modal', function (e) {
     $('#body-modal2').empty();
-    // listOfFakturPajak.forEach((el,index) => {
-    //   let number = index + 1;
-    //   let row = `
-    //   <tr>
-    //     <td class="align-middle text-center">
-    //       <span class="text-secondary text-xs font-weight-bold">${number}</span>
-    //     </td>
-    //     <td class="align-middle text-center">
-    //       <span class="text-secondary text-xs font-weight-bold">${el.no_ttf}</span>
-    //     </td>
-    //     <td class="align-middle text-center text-sm">
-    //       <span class="badge badge-sm bg-gradient-success">${el.status_ttf}</span>
-    //     </td>
-    //     <td class="align-middle text-center">
-    //       <span class="text-secondary text-xs font-weight-bold">${el.cabang_ttf}</span>
-    //     </td>
-    //     <td class="align-middle text-center">
-    //       <span class="text-secondary text-xs font-weight-bold">${el.tanggal_ttf}</span>
-    //     </td>
-    //     <td class="align-middle text-center">
-    //       <span class="text-secondary text-xs font-weight-bold">${el.tanggal_validasi}</span>
-    //     </td>
-    //     <td class="align-middle text-center">
-    //       <span class="text-secondary text-xs font-weight-bold">${el.nama_supplier}</span>
-    //     </td>
-    //     <td class="align-middle text-center">
-    //       <a href="#" class="text-decoration-none text-xs font-weight-bold">Download</a>
-    //     </td>
-    //     <td class="align-middle text-center">
-    //       <a href="#" class="text-decoration-none text-xs font-weight-bold">Delete</a>
-    //     </td>
-    //   </tr>     
-    //     `
-    //   $('#savettf').append(row);
-    // })
+    listOfFakturPajak.forEach((el,index) => {
+      let number = index + 1;
+      let row = `
+      <tr>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${number}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.no_ttf}</span>
+        </td>
+        <td class="align-middle text-center text-sm">
+          <span class="badge badge-sm bg-gradient-success">${el.status_ttf}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.cabang_ttf}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.tanggal_ttf}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.tanggal_validasi}</span>
+        </td>
+        <td class="align-middle text-center">
+          <span class="text-secondary text-xs font-weight-bold">${el.nama_supplier}</span>
+        </td>
+        <td class="align-middle text-center">
+          <a href="#" class="text-decoration-none text-xs font-weight-bold">Download</a>
+        </td>
+        <td class="align-middle text-center">
+          <a href="#" class="text-decoration-none text-xs font-weight-bold">Delete</a>
+        </td>
+      </tr>     
+        `
+      $('#savettf').append(row);
+    })
   })
 
   $('#modal5').on('shown.bs.modal', function (e) {
