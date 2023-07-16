@@ -19,11 +19,8 @@ return new class extends Migration
             $table->foreign('TTF_ID')->references('TTF_ID')->on('ttf_headers')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->integer('TTF_BPB_ID');
+            $table->bigInteger('TTF_BPB_ID');
             $table->integer('TTF_FP_ID');
-            $table->foreign('TTF_FP_ID')->references('TTF_FP_ID')->on('ttf_fp')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
             $table->string('ACTIVE_FLAG',1);
             $table->date('CREATION_DATE')->nullable();
             $table->integer('CREATED_BY')->nullable();

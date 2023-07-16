@@ -40,6 +40,7 @@ return new class extends Migration
             $table->float('SUM_TAX_BPB',14,2);
             $table->float('SELISIH_DPP',14,2);
             $table->float('SELISIH_TAX',14,2);
+            
         });
     }
 

@@ -33,6 +33,9 @@ Route::group(['middleware' => ['supplier']], function () {
     Route::get('/get-ttf-data-nofp', [InputTTFController::class, 'getTtfDataNoFP']);
     Route::post('/read_qr', [InputTTFController::class, 'read_qr'])->name('read_qr');
     Route::post('/create-ttf', [InputTTFController::class, 'createTtf']);
+    Route::get('/inputttf/submitttf/{id1}', [InputTTFController::class, 'submitTTF']);
+    Route::get('/inputttf/deletettf/{id1}', [InputTTFController::class, 'deleteTTF']);
+    Route::get('/inputttf/cetakttf/{id1}', [InputTTFController::class, 'cetakTTF']);
 
 });
 
@@ -53,5 +56,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/aturpemberitahuan', [AturPemberitahuanController::class, 'aturpemberitahuan']);
     Route::post('/aturpemberitahuan/save_pemberitahuan', [AturPemberitahuanController::class, 'save_pemberitahuan']);
     Route::get('/downloadadmin', [DownloadController::class, 'downloadadmin']);
+
 });
 

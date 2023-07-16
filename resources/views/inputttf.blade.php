@@ -20,8 +20,7 @@
             <div class="btn-group" role="group" aria-label="First group">
               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal1">Add
                 TTF</button>
-              <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#">Submit
-                TTF</button>
+            
               {{-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#">Delete
                 TTF</button> --}}
             </div>
@@ -79,11 +78,12 @@
                         <span class="text-secondary text-xs font-weight-bold">{{ $t->SUPP_SITE_ALT_NAME }}</span>
                       </td>
                       <td class="align-middle text-center">
-                        <a href="#" class="text-decoration-none text-xs font-weight-bold">Download</a>
+                        <a href="/inputttf/cetakttf/{{ $t->TTF_ID }}" class="text-decoration-none text-xs font-weight-bold">Download</a>
                       </td>
                       <td class="align-middle text-center">
                         @if($t->TTF_STATUS == "DRAFT")
-                        <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                        <a href="/inputttf/submitttf/{{ $t->TTF_ID }}" class="btn btn-secondary btn-xs" onclick="return confirm('Submit Data TTF?')">Submit</a>
+                        <a href="/inputttf/deletettf/{{ $t->TTF_ID }}" class="btn btn-danger btn-xs" onclick="return confirm('Hapus Data TTF?')">Delete</a>
                         @else
                         <a href="#" class="btn btn-danger btn-xs disabled">Delete</a>
                         @endif

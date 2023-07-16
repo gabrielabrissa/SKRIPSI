@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Exception;
 use Smalot\PdfParser\Parser;
+use PDF;
 
 class InputTTFController extends Controller
 {
@@ -74,6 +75,7 @@ class InputTTFController extends Controller
 
         $data = DB::table('ttf_data_bpb')
         ->where('BRANCH_CODE', $suppBranchCode)
+        ->where('USED_FLAG','=','N')
         ->get();
 
         return response()->json($data);
@@ -199,8 +201,57 @@ class InputTTFController extends Controller
             DB::rollBack();
             return response()->json(['message' => $e->getMessage()],500);
         }
-        
-        return response()->json(['message' => 'Data Telah di Simpan']);
+        return response()->json([
+            'message' => 'Data Telah Disimpan',
+            'URL' => '/inputttf'
+        ]);
+        // return redirect('/inputttf');
     }
+    public function submitTTF($id1) {
+        DB::table('ttf_headers')
+        ->where('TTF_ID',$id1)
+        ->update([
+            'TTF_STATUS' => "SUBMITTED"
+        ]);
+        return redirect('/inputttf');
+    }
+    public function deleteTTF($id1) {
+        DB::beginTransaction();
+        try {
+
+            DB::table('ttf_headers')
+            ->join('ttf_fp','ttf_fp.TTF_ID','=','ttf_headers.TTF_ID')
+            ->join('ttf_lines','ttf_lines.TTF_ID','=','ttf_headers.TTF_ID')
+            // ->join('ttf_data_bpb','ttf_data_bpb.BPB_ID','=','ttf_lines.TTF_BPB_ID')
+            ->where('ttf_headers.TTF_ID',$id1)
+            ->delete();
+
+             DB::table('ttf_data_bpb')  
+             ->join('ttf_lines','ttf_lines.TTF_BPB_ID','=','ttf_data_bpb.BPB_ID')                      
+             ->where('BPB_ID','ttf_lines.TTF_BPB_ID')
+             ->where('ttf_lines.TTF_ID',$id1)   
+             ->update(['USED_FLAG'=>'N']);
+
+            DB::commit();
+            return redirect('/inputttf');
+        } catch(Exception $e){
+            DB::rollBack();
+            return response()->json(['message' => $e->getMessage()],500);
+        }
+    }
+
+    public function cetakTTF($id1){
+        $ttf = DB::table('ttf_headers')
+        ->join('ttf_fp','ttf_fp.TTF_ID','=','ttf_headers.TTF_ID')
+        ->join('ttf_lines','ttf_lines.TTF_ID','=','ttf_headers.TTF_ID')
+        ->where('ttf_headers.TTF_ID',$id1)
+        ->get();
+        $pdf = PDF::loadView('cetakttf',[
+            'ttf'=>$ttf
+        ]);
+        return $pdf->stream();
+        // return $pdf->download('ttf-pdf');
+    }
+    
 
 }
