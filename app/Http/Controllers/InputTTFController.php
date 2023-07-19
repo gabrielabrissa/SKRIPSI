@@ -221,6 +221,7 @@ class InputTTFController extends Controller{
         $data = DB::table('ttf_lines')
         ->where('TTF_ID',$id)
         ->get();
+        
         for($a= 0; $a < count($data); $a++){
             DB::table('ttf_data_bpb')
             ->where('BPB_ID',$data[$a]->TTF_BPB_ID)

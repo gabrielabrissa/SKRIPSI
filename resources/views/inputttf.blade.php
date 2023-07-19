@@ -420,7 +420,7 @@
         url: "/fetch-ttf",
         dataType: 'json',
         success: function(response){
-          $('#savettf').html('');
+          $('#table-data-ttf').html('');
           var auto_inc_id = 1;
           var status = '';
           var dateTTF = '';
