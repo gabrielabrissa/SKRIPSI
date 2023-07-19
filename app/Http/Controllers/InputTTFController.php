@@ -13,10 +13,9 @@ use Exception;
 use Smalot\PdfParser\Parser;
 use PDF;
 
-class InputTTFController extends Controller
-{
-    public function pilihCabang($id2)
-    {
+class InputTTFController extends Controller{
+
+    public function pilihCabang($id2){
         $ambil = auth()->user()->id;
         $cabang = DB::table('sys_supp_site')
         ->join('sys_mapp_supp','sys_mapp_supp.BRANCH_CODE','=','sys_supp_site.SUPP_BRANCH_CODE')
@@ -26,16 +25,24 @@ class InputTTFController extends Controller
         ->get();
         return response()->json($cabang);
     }
-
-    public function inputttf()
-    {
+    public function fetchTTF(){
         $ambil = auth()->user()->id;
-        //pilih cabang
+
+        $ttf = DB::table('ttf_headers')
+        ->join('sys_supp_site','sys_supp_site.SUPP_BRANCH_CODE','=','ttf_headers.BRANCH_CODE')
+        ->where ('ttf_headers.CREATED_BY','=',$ambil)
+        ->get();
+        return response()->json([
+            'ttf' => $ttf,
+        ]);
+    }
+    public function fetchCabang(){
+        $ambil = auth()->user()->id;
+
         $cbg2 = DB::table('ttf_data_bpb')
         ->select('BRANCH_CODE', DB::raw('count(BRANCH_CODE) as jumlah'))
         ->where('USED_FLAG','=','N')
         ->groupBy('ttf_data_bpb.BRANCH_CODE');
-
         $cbg = DB::table('sys_mapp_supp')
         ->join('users','users.id','=','sys_mapp_supp.USER_ID')
         ->join('sys_supp_site','sys_supp_site.SUPP_BRANCH_CODE','=','sys_mapp_supp.BRANCH_CODE')
@@ -44,53 +51,51 @@ class InputTTFController extends Controller
         })
         ->where ('sys_mapp_supp.USER_ID','=',$ambil)
         ->get();
-
-        $ttf = DB::table('ttf_headers')
-        ->join('sys_supp_site','sys_supp_site.SUPP_BRANCH_CODE','=','ttf_headers.BRANCH_CODE')
-        ->where ('ttf_headers.CREATED_BY','=',$ambil)
-        ->get();
-
-
-        return view('inputttf', [
-            "title" => "inputttf",
-            'cbg' => $cbg,
-            'ttf' => $ttf,
+        return response()->json([
+            'ttf' => $cbg,
         ]);
     }
-
-    public function getSysSuppSite(Request $request)
-    {
-        $suppBranchCode = $request->supp_branch_code;
-
+    public function inputttf(){
+        return view('inputttf', [
+            "title" => "inputttf",
+        ]);
+    }
+    public function getSysSuppSite($id){
         $data = DB::table('sys_supp_site')
-        ->where('SUPP_BRANCH_CODE', $suppBranchCode)
+        ->where('SUPP_BRANCH_CODE', $id)
         ->first();
-
         return response()->json($data);
     }
-
-    public function getTtfDataBpb(Request $request)
-    {
-        $suppBranchCode = $request->supp_branch_code;
+    public function getTtfDataBpb($id) {
+        // $suppBranchCode = $request->supp_branch_code;
 
         $data = DB::table('ttf_data_bpb')
-        ->where('BRANCH_CODE', $suppBranchCode)
+        ->where('BRANCH_CODE', $id)
         ->where('USED_FLAG','=','N')
         ->get();
 
-        return response()->json($data);
+        return response()->json([
+            'data' => $data
+        ]);
     }
+    public function getDetailFP($id) {
 
-    public function getTtfDataNoFP(Request $request)
-    {
-        $suppBranchCode = $request->supp_branch_code;
+        $data = DB::table('no_faktur')
+        ->where('NOMOR_FAKTUR', $id)
+        ->first();
+
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+    public function getTtfDataNoFP($id) {
         $ambil = auth()->user()->id;
         $fp = DB::table('sys_supp_site')
         ->join('sys_mapp_supp','sys_supp_site.SUPP_BRANCH_CODE','=','sys_mapp_supp.BRANCH_CODE')
         ->join('users','users.id','=','sys_mapp_supp.USER_ID')
         ->join('sys_supplier','sys_supplier.SUPP_ID','=','users.SUPP_ID')
         ->where ('sys_mapp_supp.USER_ID','=',$ambil)
-        ->where('sys_supp_site.SUPP_BRANCH_CODE', $suppBranchCode)
+        ->where('sys_supp_site.SUPP_BRANCH_CODE', $id)
         ->select('sys_supp_site.SUPP_PKP_NUM')
         ->groupBy('sys_supp_site.SUPP_PKP_NUM');
 
@@ -98,10 +103,11 @@ class InputTTFController extends Controller
         ->whereIn('no_faktur.NPWP_PENJUAL',$fp)
         ->get();
 
-        return response()->json($data);
+        return response()->json([
+            'data' => $data
+        ]);
     }
-    public function read_qr(Request $request)
-    {
+    public function read_qr(Request $request) {
         $file = $request->file;
         $pdfParser = new Parser();
         $pdf = $pdfParser->parseFile($file->path());
@@ -114,9 +120,7 @@ class InputTTFController extends Controller
             'no_faktur' => $noFaktur
         ]);
     }
-
-    public function createTtf(Request $request)
-    {
+    public function createTtf(Request $request) {
         $ambil = auth()->user()->id;
         $data = $request->all();
         $jumBPB =0;
@@ -125,7 +129,6 @@ class InputTTFController extends Controller
         DB::beginTransaction();
         try{
             foreach ($data as $d) {
-                
                 $ttf_num = mt_rand(1000000,9999999);
                 $header = DB::table('ttf_headers')->insertGetId([
                     // 'TTF_ID' => '',
@@ -157,13 +160,12 @@ class InputTTFController extends Controller
                 ]);
                 foreach($d['listFP'] as $fp){
                     $ttf_fp = DB::table('ttf_fp')->insert([
-                        // 'TTF_FP_ID'=> '',
                         'TTF_ID'=> $header,
                         'FP_NUM'=> $fp['noFaktur'],
                         'FP_TYPE'=> $fp['typefp'],
                         'FP_DATE'=> now()->format('Y-m-d'),
-                        'FP_DPP_AMT'=> $fp['DPP_Faktur'],
-                        'FP_TAX_AMT'=> $fp['PPN_Faktur'],
+                        'FP_DPP_AMT'=> $fp['DPP_FP'],
+                        'FP_TAX_AMT'=> $fp['PPN_FP'],
                         'USED_FLAG'=> 'Y',
                         'CREATED_BY'=> $ambil,
                        'CREATION_DATE'=> now()->format('Y-m-d'),
@@ -203,44 +205,45 @@ class InputTTFController extends Controller
         }
         return response()->json([
             'message' => 'Data Telah Disimpan',
-            'URL' => '/inputttf'
         ]);
-        // return redirect('/inputttf');
     }
-    public function submitTTF($id1) {
+    public function submitTTF($id) {
         DB::table('ttf_headers')
-        ->where('TTF_ID',$id1)
+        ->where('TTF_ID',$id)
         ->update([
             'TTF_STATUS' => "SUBMITTED"
         ]);
-        return redirect('/inputttf');
+        return response()->json([
+            'message' => 'SUCCESS'
+        ]);
     }
-    public function deleteTTF($id1) {
-        DB::beginTransaction();
-        try {
-
-            DB::table('ttf_headers')
-            ->join('ttf_fp','ttf_fp.TTF_ID','=','ttf_headers.TTF_ID')
-            ->join('ttf_lines','ttf_lines.TTF_ID','=','ttf_headers.TTF_ID')
-            // ->join('ttf_data_bpb','ttf_data_bpb.BPB_ID','=','ttf_lines.TTF_BPB_ID')
-            ->where('ttf_headers.TTF_ID',$id1)
-            ->delete();
-
-             DB::table('ttf_data_bpb')  
-             ->join('ttf_lines','ttf_lines.TTF_BPB_ID','=','ttf_data_bpb.BPB_ID')                      
-             ->where('BPB_ID','ttf_lines.TTF_BPB_ID')
-             ->where('ttf_lines.TTF_ID',$id1)   
-             ->update(['USED_FLAG'=>'N']);
-
-            DB::commit();
-            return redirect('/inputttf');
-        } catch(Exception $e){
-            DB::rollBack();
-            return response()->json(['message' => $e->getMessage()],500);
+    public function deleteTTF($id) {
+        $data = DB::table('ttf_lines')
+        ->where('TTF_ID',$id)
+        ->get();
+        for($a= 0; $a < count($data); $a++){
+            DB::table('ttf_data_bpb')
+            ->where('BPB_ID',$data[$a]->TTF_BPB_ID)
+            ->update(['USED_FLAG'=>'N']);
         }
-    }
 
-    public function cetakTTF($id1){
+        DB::table('ttf_fp')
+        ->where('TTF_ID',$id)
+        ->delete();
+
+        DB::table('ttf_lines')
+        ->where('TTF_ID',$id)
+        ->delete();
+
+        DB::table('ttf_headers')
+        ->where('TTF_ID',$id)
+        ->delete();
+        
+        return response()->json([
+            'message' => 'SUCCESS'
+        ]);
+    }
+    public function cetakTTF($id1) {
         $ttf = DB::table('ttf_headers')
         ->join('ttf_fp','ttf_fp.TTF_ID','=','ttf_headers.TTF_ID')
         ->join('ttf_lines','ttf_lines.TTF_ID','=','ttf_headers.TTF_ID')
@@ -252,6 +255,4 @@ class InputTTFController extends Controller
         return $pdf->stream();
         // return $pdf->download('ttf-pdf');
     }
-    
-
 }

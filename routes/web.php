@@ -24,17 +24,21 @@ Route::group(['middleware' => ['supplier']], function () {
     Route::get('/home', [HomeController::class, 'index']);
     Route::get('/home/jk', [HomeController::class, 'downloadJK']);
     Route::get('/inputttf', [InputTTFController::class, 'inputttf']);
+    Route::get('/fetch-ttf', [InputTTFController::class, 'fetchTTF']);
+    Route::get('/fetch-cabang', [InputTTFController::class, 'fetchCabang']);
     Route::get('/addttf/{id1}', [InputTTFController::class, 'addttf']);
     Route::get('/tambahfp/{id1}', [InputTTFController::class, 'tambahfp']);
     Route::get('/download', [DownloadController::class, 'download']);
 
-    Route::get('/get-ttf-data-bpb', [InputTTFController::class, 'getTtfDataBpb']);
-    Route::get('/get-sys-supp-site', [InputTTFController::class, 'getSysSuppSite']);
-    Route::get('/get-ttf-data-nofp', [InputTTFController::class, 'getTtfDataNoFP']);
+    Route::get('/get-ttf-data-bpb/{id}', [InputTTFController::class, 'getTtfDataBpb']);
+    Route::get('/get-sys-supp-site/{id}', [InputTTFController::class, 'getSysSuppSite']);
+    Route::get('/get-ttf-data-nofp/{id}', [InputTTFController::class, 'getTtfDataNoFP']);
+    Route::get('/get-detail-fp/{id}', [InputTTFController::class, 'getDetailFP']);
     Route::post('/read_qr', [InputTTFController::class, 'read_qr'])->name('read_qr');
     Route::post('/create-ttf', [InputTTFController::class, 'createTtf']);
-    Route::get('/inputttf/submitttf/{id1}', [InputTTFController::class, 'submitTTF']);
-    Route::get('/inputttf/deletettf/{id1}', [InputTTFController::class, 'deleteTTF']);
+    Route::post('/update-fp-bpb', [InputTTFController::class, 'updateFpBpb']);
+    Route::get('/inputttf/submitttf/{id}', [InputTTFController::class, 'submitTTF']);
+    Route::get('/inputttf/deletettf/{id}', [InputTTFController::class, 'deleteTTF']);
     Route::get('/inputttf/cetakttf/{id1}', [InputTTFController::class, 'cetakTTF']);
 
 });
