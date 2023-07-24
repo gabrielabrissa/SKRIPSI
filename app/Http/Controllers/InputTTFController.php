@@ -159,7 +159,7 @@ class InputTTFController extends Controller{
                     'SELISIH_TAX' => $d['ttfselisihPPN'],
                 ]);
                 foreach($d['listFP'] as $fp){
-                    $ttf_fp = DB::table('ttf_fp')->insert([
+                    $ttf_fp = DB::table('ttf_fp')->insertGetId([
                         'TTF_ID'=> $header,
                         'FP_NUM'=> $fp['noFaktur'],
                         'FP_TYPE'=> $fp['typefp'],
@@ -246,12 +246,18 @@ class InputTTFController extends Controller{
     }
     public function cetakTTF($id1) {
         $ttf = DB::table('ttf_headers')
-        ->join('ttf_fp','ttf_fp.TTF_ID','=','ttf_headers.TTF_ID')
-        ->join('ttf_lines','ttf_lines.TTF_ID','=','ttf_headers.TTF_ID')
         ->where('ttf_headers.TTF_ID',$id1)
         ->get();
+        $ttf2 = DB::table('ttf_data_bpb')
+        ->join('ttf_lines','ttf_lines.TTF_BPB_ID','=','ttf_data_bpb.BPB_ID')
+        ->join('ttf_fp','ttf_fp.TTF_FP_ID','=','ttf_lines.TTF_FP_ID')
+        ->join('ttf_headers','ttf_headers.TTF_ID','=','ttf_fp.TTF_ID')
+        ->where('ttf_lines.TTF_ID',$id1)
+        ->get();
+        
         $pdf = PDF::loadView('cetakttf',[
-            'ttf'=>$ttf
+            'ttf'=>$ttf,
+            'ttf2'=>$ttf2,
         ]);
         return $pdf->stream();
         // return $pdf->download('ttf-pdf');

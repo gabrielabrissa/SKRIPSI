@@ -313,7 +313,7 @@
   
             <!--  End Tabel BPB -->
             <div class="modal-footer ">
-              <button type="button" class="btn btn-secondary btn-sm close-add-fp-bpb">Close</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="close-add-fp-bpb">Close</button>
               <button type="button" name="button" class="btn btn-primary btn-sm" id="save-fp">Save</button>
             </div>
           </div>
@@ -838,6 +838,9 @@
     $(document).on('click', '#btn-close-add-bpb', function(e){
       $("#modal-pilih-bpb").modal('hide');
     })
+    $(document).on('click', '#close-add-fp-bpb', function(e){
+      $("#modal-add-fp-bpb").modal('hide');
+    })
     $(document).on('change', '.checklist-bpb', function(e) {
       const isChecked = $(this).is(':checked');
       const bpbNumber = $(this).attr('id');
@@ -969,6 +972,7 @@
       $("#modal-add-ttf").modal('hide');
       $("#modal-cabang").modal('hide');
     })
+
   // const rupiah = (number)=>{
   //   return new Intl.NumberFormat({
   //     style: "currency"
