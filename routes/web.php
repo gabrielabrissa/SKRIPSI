@@ -23,12 +23,13 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::group(['middleware' => ['supplier']], function () {
     Route::get('/home', [HomeController::class, 'index']);
     Route::get('/home/jk', [HomeController::class, 'downloadJK']);
-    Route::get('/inputttf', [InputTTFController::class, 'inputttf']);
+    Route::get('/inputttf', [InputTTFController::class, 'inputttf'])->name('barcode.generate');
     Route::get('/fetch-ttf', [InputTTFController::class, 'fetchTTF']);
     Route::get('/fetch-cabang', [InputTTFController::class, 'fetchCabang']);
     Route::get('/addttf/{id1}', [InputTTFController::class, 'addttf']);
     Route::get('/tambahfp/{id1}', [InputTTFController::class, 'tambahfp']);
     Route::get('/download', [DownloadController::class, 'download']);
+    
 
     Route::get('/get-ttf-data-bpb/{id}', [InputTTFController::class, 'getTtfDataBpb']);
     Route::get('/get-sys-supp-site/{id}', [InputTTFController::class, 'getSysSuppSite']);

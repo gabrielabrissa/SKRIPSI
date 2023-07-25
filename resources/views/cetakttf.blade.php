@@ -73,9 +73,8 @@
         <table border="0" align="center">
             <tr>            
                 <td align="center">
-                    {{-- {{$d}} --}}
                     <br><br>
-                <font >BARCODE</font>
+                {!! $barcode !!}
                 </td>
             </tr>
             <tr>  
@@ -222,5 +221,6 @@
        
  
     @endforeach
+
 </body>
 </html>

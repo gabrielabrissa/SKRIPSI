@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Exception;
 use Smalot\PdfParser\Parser;
 use PDF;
+use Picqer\Barcode\BarcodeGeneratorHTML;
 
 class InputTTFController extends Controller{
 
@@ -245,6 +246,9 @@ class InputTTFController extends Controller{
         ]);
     }
     public function cetakTTF($id1) {
+        $ttf1 = DB::table('ttf_headers')
+        ->where('ttf_headers.TTF_ID',$id1)
+        ->value('TTF_NUM');
         $ttf = DB::table('ttf_headers')
         ->where('ttf_headers.TTF_ID',$id1)
         ->get();
@@ -254,12 +258,18 @@ class InputTTFController extends Controller{
         ->join('ttf_headers','ttf_headers.TTF_ID','=','ttf_fp.TTF_ID')
         ->where('ttf_lines.TTF_ID',$id1)
         ->get();
-        
+        $barcodeGenerator = new BarcodeGeneratorHTML();
+        $barcodeData = $ttf1;
+        $barcodeType = BarcodeGeneratorHTML::TYPE_CODE_128;
+        $barcode = $barcodeGenerator->getBarcode($barcodeData, $barcodeType);
+
         $pdf = PDF::loadView('cetakttf',[
             'ttf'=>$ttf,
             'ttf2'=>$ttf2,
+            'barcode'=>$barcode,
         ]);
+        
         return $pdf->stream();
-        // return $pdf->download('ttf-pdf');
+        // // return $pdf->download('ttf-pdf');
     }
 }
