@@ -30,5 +30,12 @@ class AturPemberitahuanController extends Controller
         ]);
         return redirect('/aturpemberitahuan');
     }
+
+    public function delete_pemberitahuan($id1) {
+        DB::table('pemberitahuan')
+        ->where('ID',$id1)
+        ->delete();
+        return redirect('/aturpemberitahuan');
+    }
     
 }

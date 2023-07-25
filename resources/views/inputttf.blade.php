@@ -22,7 +22,7 @@
               <button type="button" class="btn btn-primary btn-sm" id="btn-show-pilih-cabang">Add
                 TTF</button>
             </div>
-            <div class="row">
+            {{-- <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
                   <div class="input-group mb-2">
@@ -30,7 +30,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table table-bordered">
@@ -50,7 +50,7 @@
                   <tbody id="table-data-ttf">
                   </tbody>
                 </table>
-                <nav aria-label="...">
+                {{-- <nav aria-label="...">
                   <ul class="pagination pagination-sm">
                     <li class="page-item">
                       <a class="page-link" href="#" aria-label="Previous">
@@ -66,7 +66,7 @@
                       </a>
                     </li>
                   </ul>
-                </nav>
+                </nav> --}}
               </div>
             </div>
           </div>
@@ -608,7 +608,7 @@
             <span class="text-secondary text-xs font-weight-bold">${el.Selisih_PPN}</span>
           </td>
           <td class="align-middle text-center">
-            <span class="text-secondary text-xs font-weight-bold">asd</span>
+            <span class="text-secondary text-xs font-weight-bold">${el.listOfBPB[0].FLAG_PPN}</span>
           </td>
         </tr>`);
       })

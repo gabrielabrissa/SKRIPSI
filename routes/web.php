@@ -28,7 +28,7 @@ Route::group(['middleware' => ['supplier']], function () {
     Route::get('/fetch-cabang', [InputTTFController::class, 'fetchCabang']);
     Route::get('/addttf/{id1}', [InputTTFController::class, 'addttf']);
     Route::get('/tambahfp/{id1}', [InputTTFController::class, 'tambahfp']);
-    Route::get('/download', [DownloadController::class, 'download']);
+    // Route::get('/download', [DownloadController::class, 'download']);
     
 
     Route::get('/get-ttf-data-bpb/{id}', [InputTTFController::class, 'getTtfDataBpb']);
@@ -48,19 +48,20 @@ Route::group(['middleware' => ['supplier']], function () {
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/homeadmin', [HomeController::class, 'indexadmin']);
     Route::get('/homeadmin/jk', [HomeController::class, 'downloadJK']);
-    Route::get('/aturlimit', [AturLimitController::class, 'aturlimit']);
     Route::get('/aturuser', [AturUserController::class, 'aturuser']);
     Route::get('/aturuser/adduser', [AturUserController::class, 'adduser']);
     Route::get('/get-Sys-Supp', [AturUserController::class, 'getSysSupp']);
-    Route::get('/datattf', [DataTTFController::class, 'datattf']);
-    Route::get('/datasup', [DataTTFController::class, 'datasup']);
-    Route::get('/datalampfp', [DataTTFController::class, 'datalampfp']);
-    Route::get('/kuotaharian', [KuotaHarianSupController::class, 'kuotaharian']);
     Route::get('/laporanttf', [LaporanTTFController::class, 'laporanttf']);
-    Route::get('/monitoringfp', [MonitoringFileController::class, 'monitoringfp']);
     Route::get('/aturpemberitahuan', [AturPemberitahuanController::class, 'aturpemberitahuan']);
     Route::post('/aturpemberitahuan/save_pemberitahuan', [AturPemberitahuanController::class, 'save_pemberitahuan']);
-    Route::get('/downloadadmin', [DownloadController::class, 'downloadadmin']);
+    Route::get('/aturpemberitahuan/delete_pemberitahuan/{id1}', [AturPemberitahuanController::class, 'delete_pemberitahuan']);
 
+    // Route::get('/aturlimit', [AturLimitController::class, 'aturlimit']);
+    // Route::get('/datattf', [DataTTFController::class, 'datattf']);
+    // Route::get('/datasup', [DataTTFController::class, 'datasup']);
+    // Route::get('/datalampfp', [DataTTFController::class, 'datalampfp']);
+    // Route::get('/kuotaharian', [KuotaHarianSupController::class, 'kuotaharian']);
+    // Route::get('/monitoringfp', [MonitoringFileController::class, 'monitoringfp']);
+    // Route::get('/downloadadmin', [DownloadController::class, 'downloadadmin']);
 });
 

@@ -28,7 +28,7 @@
           </a>
         </li>
       </div>
-      <div class= "border-top border-muted">
+      {{-- <div class= "border-top border-muted">
         <li class="nav-item {{($title === "download") ? 'bg-light' : ''}}">
         <a class="nav-link {{($title === "download") ? 'active' : ''}}"  href="/download">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -37,6 +37,6 @@
             <span class="nav-link-text ms-1">Download</span>
           </a>
         </li>
-        </div>
+        </div> --}}
       </ul>
   </aside>

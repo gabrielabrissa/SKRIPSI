@@ -81,8 +81,8 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$p->SUBJEK }}</span>
                             </td>
                             <td class="align-middle text-center">
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal6{{ $p->ID }}">Detail</button>
-
+                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal6{{ $p->ID }}">Detail</button>
+                            <a href="/aturpemberitahuan/delete_pemberitahuan/{{$p->ID }}" class="btn btn-danger btn-xs">Delete</a>
                             @include('Modal.pemberitahuanModal') 
                             <?php $no++;?>
                             

@@ -12,58 +12,78 @@
 @section('body')
 <!-- Filter Data -->
 <div class="container-fluid py-4 px-0">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="card">
-          <div class="card-header pb-0">
-              <div class="d-flex align-items-center">
-                <p class="mb-0">Laporan Inputan TTF Supplier</p>
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="input-group mb-2">
+                    <h6 class="font-weight-bolder mb-0">Laporan Data TTF Supplier</h6>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Cabang</label>
-                    <input class="form-control" type="text" >
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">TTF Number</label>
-                    <input class="form-control" type="text">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Start Date</label>
-                    <input class="form-control" type="text">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">End Date</label>
-                    <input class="form-control" type="text">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Inputan</label>
-                    <input class="form-control" type="text">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Status</label>
-                    <input class="form-control" type="text">
-                  </div>
-                </div>
-                <div class="col-12 text-end">
-                  <button class="btn btn-outline-primary btn-sm mb-0">Print</button>
-                </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table table-bordered -mb-1">
+                  <thead>
+                    <tr>
+                      <th class="fw-semibold text-xs font-weight-bolder ">No</th>
+                      <th class="fw-semibold  text-xs font-weight-bolder ">No TTF</th>
+                      <th class="fw-semibold  text-xs font-weight-bolder ">Status</th>
+                      <th class="fw-semibold text-xs font-weight-bolder ">Cabang</th>
+                      <th class="fw-semibold  text-xs font-weight-bolder ">Tanggal TTF</th>
+                      <th class="fw-semibold text-xs font-weight-bolder ">Tanggal Validasi </th>
+                      <th class="fw-semibold  text-xs font-weight-bolder ">Supplier</th>
+                      <th class="fw-semibold  text-xs font-weight-bolder ">Lampiran</th>
+                    </tr>
+                  </thead>
+                  <tbody id="savettf">
+                    @foreach($ttf as $t)
+                    <tr>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ $loop->iteration }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ $t->TTF_NUM }}</span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        @if($t->TTF_STATUS == "DRAFT")
+                        <span class="badge badge-sm bg-gradient-secondary">DRAFT</span>
+                        @else
+                        <span class="badge badge-sm bg-gradient-success">SUBMITTED</span>
+                        @endif
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ $t->SUPP_ADDR_PROVINCE }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($t->TTF_DATE)) }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($t->TTF_RETURN_DATE)) }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ $t->SUPP_SITE_ALT_NAME }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <a href="/inputttf/cetakttf/{{ $t->TTF_ID }}" class="text-decoration-none text-xs font-weight-bold">Download</a>
+                      </td>
+                      
+                    </tr>     
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 @endsection

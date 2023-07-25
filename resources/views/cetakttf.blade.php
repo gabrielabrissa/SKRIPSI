@@ -97,7 +97,7 @@
             @foreach($ttf2 as $t2)
             <tr align="center">
                 <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">{{$t2->TTF_NUM}}</span>
+                  <span class="text-secondary text-xs font-weight-bold">{{$t2->FP_NUM}}</span>
                 </td>
                 
                 <td class="align-middle text-center">
@@ -130,7 +130,7 @@
                     <span class="text-secondary text-xs font-weight-bold">TOTAL FAKTUR PAJAK</span>
                   </td>
                 <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">{{$t1->SUM_DPP_BPB}}</span>
+                  <span class="text-secondary text-xs font-weight-bold">{{$t2->SUM_DPP_BPB}}</span>
                 </td>
                 
                 <td class="align-middle text-center">
