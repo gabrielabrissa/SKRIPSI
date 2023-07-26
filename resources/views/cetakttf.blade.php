@@ -62,11 +62,18 @@
 @foreach($ttf as $t1)
         <img src="imc.jpg" width=100 height=40/> 
             <table border="0" align="center">
-                <tr>            
+                <tr>   
+                    @if($t1->TTF_STATUS == "DRAFT")
                     <td align="center" style="font-family: Arial, Helvetica, sans-serif">
-                    <font size="3"><b>TANDA TERIMA FAKTUR SEMENTARA</b></font><br>
-                        <span style="font-size: x-small">Nomor TTF : {{$t1->TTF_NUM}}</span>
-                    </td>
+                        <font size="3"><b>DRAFT TANDA TERIMA FAKTUR SEMENTARA</b></font><br>
+                            <span style="font-size: x-small">Nomor TTF : {{$t1->TTF_NUM}}</span>
+                    </td> 
+                    @else
+                    <td align="center" style="font-family: Arial, Helvetica, sans-serif">
+                        <font size="3"><b>TANDA TERIMA FAKTUR SEMENTARA</b></font><br>
+                            <span style="font-size: x-small">Nomor TTF : {{$t1->TTF_NUM}}</span>
+                    </td> 
+                    @endif  
                 </tr>
             </table>
             <br>
@@ -125,7 +132,7 @@
                   </td>
               </tr>
               @endforeach
-              <tr align="center">
+              {{-- <tr align="center">
                 <td colspan="6" class="align-middle text-center"align="center">
                     <span class="text-secondary text-xs font-weight-bold">TOTAL FAKTUR PAJAK</span>
                   </td>
@@ -137,7 +144,7 @@
                   <span class="text-secondary text-xs font-weight-bold">{{$t2->SUM_TAX_BPB}}</span>
                 </td>
                 <td class="align-middle text-center text-sm"></td>
-              </tr>
+              </tr> --}}
               <tr align="center">
                 <td rowspan="2" colspan="6" class="align-middle text-center" align="center">
                     <span class="text-secondary text-xs font-weight-bold">GRAND TOTAL</span>

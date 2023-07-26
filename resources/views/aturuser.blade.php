@@ -27,7 +27,7 @@
                   <tr>
                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Username</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah Supp</th>
+                      {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah Supp</th> --}}
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Buat</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User Role</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Active Flag</th>
@@ -44,9 +44,9 @@
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{$u->USER_EMAIL }}</span>
                       </td>
-                      <td class="align-middle text-center">
+                      {{-- <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold"></span>
-                      </td>
+                      </td> --}}
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{ date('d F Y', strtotime($u->CREATION_DATE)) }}</span>
                       </td>
@@ -90,5 +90,6 @@
         </div>
       </div>
       </div>
+      
 @include('Modal.userModal') 
 @endsection

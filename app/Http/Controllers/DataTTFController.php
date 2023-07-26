@@ -9,22 +9,18 @@ use Illuminate\Support\Facades\Response;
 
 class DataTTFController extends Controller
 {
-    public function datattf()
-    {
-        return view('datattf', [
-            "title" => "datattf"
-        ]);
-    }
     public function datasup()
     {
+        $sup = DB::table('sys_supplier')
+        ->get();
+
+
         return view('datasup', [
-            "title" => "datattf"
+            "title" => "datasup",
+            'sup' => $sup,
         ]);
     }
-    public function datalampfp()
-    {
-        return view('datalampfp', [
-            "title" => "datattf"
-        ]);
-    }
+        
+   
+    
 }

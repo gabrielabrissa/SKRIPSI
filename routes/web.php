@@ -55,10 +55,11 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/aturpemberitahuan', [AturPemberitahuanController::class, 'aturpemberitahuan']);
     Route::post('/aturpemberitahuan/save_pemberitahuan', [AturPemberitahuanController::class, 'save_pemberitahuan']);
     Route::get('/aturpemberitahuan/delete_pemberitahuan/{id1}', [AturPemberitahuanController::class, 'delete_pemberitahuan']);
-
+    Route::get('/datasup', [DataTTFController::class, 'datasup']);
+    Route::post('/create-user', [AturUserController::class, 'createUser']);
+    // Route::get('/fetch-user', [InputTTFController::class, 'fetchUser']);
     // Route::get('/aturlimit', [AturLimitController::class, 'aturlimit']);
     // Route::get('/datattf', [DataTTFController::class, 'datattf']);
-    // Route::get('/datasup', [DataTTFController::class, 'datasup']);
     // Route::get('/datalampfp', [DataTTFController::class, 'datalampfp']);
     // Route::get('/kuotaharian', [KuotaHarianSupController::class, 'kuotaharian']);
     // Route::get('/monitoringfp', [MonitoringFileController::class, 'monitoringfp']);

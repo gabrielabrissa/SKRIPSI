@@ -10,7 +10,6 @@
 
 
 @section('body')
-<!-- Filter Data -->
 <div class="container-fluid py-4 px-0">
   <div class="row">
     <div class="col-12">
@@ -26,6 +25,7 @@
                 </div>
               </div>
             </div>
+          </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table table-bordered -mb-1">
@@ -38,6 +38,7 @@
                       <th class="fw-semibold  text-xs font-weight-bolder ">Tanggal TTF</th>
                       <th class="fw-semibold text-xs font-weight-bolder ">Tanggal Validasi </th>
                       <th class="fw-semibold  text-xs font-weight-bolder ">Supplier</th>
+                      <th class="fw-semibold  text-xs font-weight-bolder ">Username</th>
                       <th class="fw-semibold  text-xs font-weight-bolder ">Lampiran</th>
                     </tr>
                   </thead>
@@ -70,6 +71,9 @@
                         <span class="text-secondary text-xs font-weight-bold">{{ $t->SUPP_SITE_ALT_NAME }}</span>
                       </td>
                       <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ $t->USERNAME }}</span>
+                      </td>
+                      <td class="align-middle text-center">
                         <a href="/inputttf/cetakttf/{{ $t->TTF_ID }}" class="text-decoration-none text-xs font-weight-bold">Download</a>
                       </td>
                       
@@ -80,7 +84,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>

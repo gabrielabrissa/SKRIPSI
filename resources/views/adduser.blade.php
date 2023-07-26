@@ -20,14 +20,13 @@
           </div>
         </div>
         <div class="card-body">
-        <div class="row">
-          <form action="/aturuser/simpan_user" method="post" class="">                        
+        <div class="row">                  
             @php echo csrf_field() @endphp
           <div class="form-group required">
             <div class="row mb-1">
                 <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">Username</label>
                 <div class="col-sm-8"> 
-                    <input type="text" class="form-control form-control-sm" name="username"id="username" placeholder="Masukan Username">
+                    <input type="text" id="username-user" class="form-control form-control-sm" name="username"id="username" placeholder="Masukan Username">
                 </div>
             </div>
         </div>
@@ -35,7 +34,7 @@
             <div class="row mb-1">
                 <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">Password</label>
                 <div class="col-sm-8"> 
-                    <input type="text" class="form-control form-control-sm" id="password" name="password" placeholder="Masukan Password">
+                    <input type="text" id="psw-user" class="form-control form-control-sm" id="password" name="password" placeholder="Masukan Password">
                 </div>
             </div>
         </div>
@@ -43,7 +42,7 @@
             <div class="row mb-1">
                 <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">Email</label>
                 <div class="col-sm-8"> 
-                    <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="Masukan Email">
+                    <input type="text" id="email-user" class="form-control form-control-sm" id="email" name="email" placeholder="Masukan Email">
                 </div>
             </div>
         </div>
@@ -51,7 +50,7 @@
             <div class="row mb-1">
                 <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">Nama Supplier</label>
                 <div class="col-sm-8"> 
-                    <select class="form-select  form-select-sm" onchange="pilihSP(this)" placeholder="Pilih Supplier" id="selection" name="supplier" required="required">
+                    <select id="selection" class="form-select  form-select-sm" onchange="pilihSP(this)" placeholder="Pilih Supplier" id="selection" name="supplier" required="required">
                         <option selected>Pilih Supplier</option>
                         @foreach ($supp as $s)
                         <option value="{{ $s->SUPP_ID }}">{{ $s->SUPP_NAME }}</option>
@@ -66,11 +65,11 @@
                 <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-primary">Active Flag</label>
                 <div class="col-sm-8">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="activeflag1" id="activeflag1" value="Y">
+                        <input id="activeflag1" class="form-check-input" type="radio" name="activeflag" value="Y">
                         <label class="form-check-label" for="inlineRadio3">Ya</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="activeflag2" id="activeflag2" value="N">
+                    <div id="activeflag2" class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="activeflag2" id="activeflag" value="N">
                         <label class="form-check-label" for="inlineRadio4">Tidak</label>
                     </div>
                 </div>
@@ -104,11 +103,12 @@
                   </div>
                   </div>
           </div>
+          <div >
+            <button class="btn btn-success btn-sm" id="save-user">Save</button>
           </div>
           </div>
           </div>
-             
-        </form>
+          </div>
         </div>
       </div>
 </div>
@@ -164,6 +164,7 @@
     var selectedSupId = null;
     var optionsSupSite = []; // array of SuppSite from api
     var selectedSupSite = []; // array of selected SuppSite
+    var listUser = [];
 
     function pilihSP(sup) {
     selectedSupId = sup.value;
@@ -285,7 +286,40 @@
             $('#selectedSupSite').append(row);
           })
         })
+      
+      document.getElementById("save-user").addEventListener("click", function(){
+      let username = document.getElementById("username-user");
+      let password = document.getElementById("psw-user");
+      let email = document.getElementById("email-user");
+      let nama_supp = document.getElementById("selection");
+      let aktif_flag = document.getElementById("activeflag1");
+      let listSupp = selectedSupSite;
 
+      let userr = {
+        username,
+        password,
+        email,
+        nama_supp,
+        aktif_flag,
+        listSupp,
+      }
+      listUser.push(userr);
+      fetch('/create-user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify(listUser)
+      })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    })
 
   </script>
 @endsection

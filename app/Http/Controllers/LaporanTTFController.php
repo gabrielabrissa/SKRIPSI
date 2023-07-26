@@ -27,12 +27,13 @@ class LaporanTTFController extends Controller
 
         $ttf = DB::table('ttf_headers')
         ->join('sys_supp_site','sys_supp_site.SUPP_BRANCH_CODE','=','ttf_headers.BRANCH_CODE')
+        ->join('sys_mapp_supp','sys_supp_site.SUPP_BRANCH_CODE','=','sys_mapp_supp.BRANCH_CODE')
+        ->join('users','users.id','=','sys_mapp_supp.USER_ID')
         ->get();
 
 
         return view('laporanttf', [
             "title" => "laporanttf",
-            'cbg' => $cbg,
             'ttf' => $ttf,
         ]);
     }

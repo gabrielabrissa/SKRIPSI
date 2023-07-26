@@ -39,16 +39,16 @@
           </a>
         </li>
         </div> --}}
-        {{-- <div class= "border-top border-muted">
-        <li class="nav-item {{($title === "datattf") ? 'bg-light' : ''}}">
-        <a class="nav-link {{($title === "datattf") ? 'active' : ''}}"  href="/datattf">
+        <div class= "border-top border-muted">
+        <li class="nav-item {{($title === "datasup") ? 'bg-light' : ''}}">
+        <a class="nav-link {{($title === "datasup") ? 'active' : ''}}"  href="/datasup">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-app text-info text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Data TTF Supplier</span>
+            <span class="nav-link-text ms-1">Data Supplier</span>
           </a>
         </li>
-        </div> --}}
+        </div>
         {{-- <div class= "border-top border-muted">
         <li class="nav-item {{($title === "aturlimit") ? 'bg-light' : ''}}">
         <a class="nav-link {{($title === "aturlimit") ? 'active' : ''}}"  href="/aturlimit">
